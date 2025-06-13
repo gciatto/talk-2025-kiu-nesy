@@ -8,9 +8,10 @@ outputs = ["Reveal"]
 
 {{% section %}}
 
-# Symbolic Knowledge Extraction and Injection: Theory and Methods
+# Symbolic Knowledge Extraction and Injection:<br>Theory and Methods
 
-{{< gc-address >}} and {{< mm-address >}}, Dipartimento di Informatica — Scienza e Ingegneria (DISI), Sede di Cesena,
+{{< gc >}} and {{< mm >}}
+<br>Dipartimento di Informatica — Scienza e Ingegneria (DISI), Sede di Cesena,
 <br> Alma Mater Studiorum—Università di Bologna
 
 <span class="hint">(last built on: {{< today >}})</span>
