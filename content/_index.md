@@ -22,7 +22,7 @@ outputs = ["Reveal"]
 
 <{{< slides-url >}}>
 
-{{< qrcode data=.Site.BaseURL >}}
+{{< qrcode >}}
 
 [<i class="fa fa-print" aria-hidden="true"></i> printable version](?print-pdf&pdfSeparateFragments=false)
 
