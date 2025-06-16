@@ -117,6 +117,21 @@ Two broad categories of AI approaches:
 
 ---
 
+## What do these _symbolic_ approaches have in common?
+
+- **Structured representations**: knowledge (I/O data) is represented in a structured, formal way (e.g., logic formulas, ontologies)
+
+- **Algorithmic manipulation of representations**: each approach relies on algorithms that manipulate these structured representations following exact rules
+
+- **Crisp semantics**: the meaning of the representations is well-defined, and the algorithms produce exact results
+    + representations are either _well-formed or not_, algorithms rely on rules which are either _applicable or not_
+
+- **Model-driven**: algorithms may commonly work in zero- or few-shot settings, humans must commonly model and encode knowledge in the target structure
+
+- **Clear computational complexity**: the decidability, complexity, and tractability of the algorithms are well understood
+
+---
+
 {{% section %}}
 
 ## Examples of Sub-symbolic AI (pt. 1)
@@ -154,6 +169,104 @@ Data separation vs. curve fitting:
 
 Focus on the target feature:
 
-{{< image src="./images/classification-vs-regression2.png" alt="Classification vs. Regression: finite vs. continous target feature" width="100%" max-h="60vh" >}}
+{{< image src="./images/classification-vs-regression2.png" alt="Classification vs. Regression: finite vs. continuous target feature" width="100%" max-h="60vh" >}}
+
+---
+
+## Examples of Sub-symbolic AI (pt. 5)
+
+### Unsupervised learning – Clustering
+
+{{< image src="./images/clustering.png" alt="Example of the clustering task" width="100%" max-h="60vh" >}}
+
+---
+
+## Examples of Sub-symbolic AI (pt. 6)
+
+### Unsupervised learning – Reinforcement learning (metaphor)
+
+{{< image src="./images/reinforcement.svg" alt="Main idea behind reinforcement learning" width="100%" max-h="60vh" >}}
+
+---
+
+## Examples of Sub-symbolic AI (pt. 7)
+
+### Reinforcement learning – Reinforcement learning (policy)
+
+{{< image src="./images/q-table.png" alt="The goal of reinforcement learning is to estimate a policy, i.e. a function (e.g. a table) estimating the expected reward per each state–action pair" width="100%" max-h="60vh" >}}
+
+{{% /section %}}
+
+---
+
+## What do these _sub-symbolic_ approaches have in common?
+
+- **Numeric representations**: knowledge (I/O data) is represented in a less structured way, often as vectors/matrices/tensors of numbers
+
+- **Differentiable manipulation of representations**: algorithms rely on mathematical operations involving these numeric representations, most-commonly undergoing some optimization process
+    + e.g., sum, product, max, min, etc.
+
+- **Fuzzy/continuous semantics**: representations are from continuous spaces, where similarities and distances are defined in a continuous way, and algorithms may yield fuzzy results
+
+- **Data-driven** + **Usage vs. training**: algorithms are often trained on data, to be later re-used on other data
+    + usage is commonly impractical or impossible without training
+
+- **Unclear computational complexity**: strong reliance on greedy or time-limited optimization methods, lack of theoretical guarantees on the quality of the results
+
+---
+
+{{% section %}}
+
+## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 1)
+
+### Local vs. Distributed Representations
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./images/local-distributed-representations.png" alt="Local vs. Distributed Representations of a bunch of animals" width="100%" max-h="60vh" >}}
+{{% /col %}}
+{{% col %}}
+<br>
+
+- __Local__ $\approx$ "symbolic": each symbol has a clear, distinct meaning
+    + e.g. `"bear"` is a symbol denoting a crisp category (either the animal is a bear or not)
+
+- __Distributed__ $\approx$ "non-symbolic": symbols do not have a clear meaning per se, but the whole representation does
+    + e.g. `"swim"` is fuzzy capability: one animal may be (un)able to swim to some extent
+
+<br>
+
+{{% fragment %}}
+> Let's say we need to represent $N$ classes, how many columns would the tables have?
+{{% /fragment %}}
+
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 2)
+
+### What is a "symbol" after all? Aren't numbers symbols too?
+
+According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_6):
+
+> __Symbolic__ representations of knowledge
+> - involve a _set of symbols_
+> - which can be _combined_ (e.g., concatenated) in (possibly) infinitely many ways,
+> - following precise _syntactical rules_,
+> - where both elementary symbols and any admissible combination of them can be _assigned with meaning_
+
+---
+
+## Why "*Sub*-symbolic" instead of "Non-symbolic" or just "Numerical"?
+
+- There exist approaches where symbols are combined with numbers, e.g.:
+    + **Probabilistic logic programming**: where logic statements are combined with probabilities
+    + **Fuzzy logic**: where logic statements are combined with degrees of truth
+    + **Bayesian networks**: a.k.a. graphical models, where nodes are symbols and edges are conditional dependencies with probabilities, e.g.
+        ![Example of a Bayesian network](./images/bn.png)
+
+- These approaches are _not purely symbolic_, but they are _not purely numeric_ either, so we call the overall category __"sub-symbolic"__
 
 {{% /section %}}
