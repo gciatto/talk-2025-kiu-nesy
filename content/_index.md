@@ -105,10 +105,10 @@ Two broad categories of AI approaches:
 
 #### Available actions
 
-- `grab(X)`: grabs block `X` from the table
-- `put(X)`: puts block `X` on the table
-- `stack(X, Y)`: stacks block `X` on top of block `Y`
-- `unstack(X, Y)`: un-stacks block `X` from block `Y`
+- $grab(X)`: grabs block $X$ from the table
+- $put(X)`: puts block $X$ on the table
+- $stack(X, Y)`: stacks block $X$ on top of block $Y`
+- $unstack(X, Y)`: un-stacks block $X$ from block $Y`
 
 {{% /col %}}
 {{% /multicol %}}
@@ -229,10 +229,10 @@ Focus on the target feature:
 <br>
 
 - __Local__ $\approx$ "symbolic": each symbol has a clear, distinct meaning
-    + e.g. `"bear"` is a symbol denoting a crisp category (either the animal is a bear or not)
+    + e.g. `"bear"$ is a symbol denoting a crisp category (either the animal is a bear or not)
 
 - __Distributed__ $\approx$ "non-symbolic": symbols do not have a clear meaning per se, but the whole representation does
-    + e.g. `"swim"` is fuzzy capability: one animal may be (un)able to swim to some extent
+    + e.g. `"swim"$ is fuzzy capability: one animal may be (un)able to swim to some extent
 
 <br>
 
@@ -312,25 +312,27 @@ How to inject symbolic knowledge into sub-symbolic predictors
 
 {{% section %}}
 
-## Concept (pt. 1)
+## Concepts
+Main entities and how to inject symbolic knowledge into sub-symbolic predictors
 
 ---
 
-## Concept (pt. 2)
+## Entities
 
-{{% /section %}}
+- **Predictor**: a sub-symbolic model that makes predictions based on input data, usually a neural network
 
----
+- **Symbolic knowledge**: structured, formal knowledge that can be represented in a symbolic form. The most common forms of symbolic knowledge are
+  - _Propositional logic_, simple rules with if-then structure
+  - _Datalog_, a subset of first-order logic with no function symbols, only constants and variables
 
-{{% section %}}
+- **Fuzzification**: the process of converting symbolic knowledge into a form that can be used by sub-symbolic predictors, e.g. by assigning degrees of truth to symbolic statements
 
-## Overview
-
-How can we inject symbolic knowledge into sub-symbolic predictors?
+- **Injector**: the main component that injects symbolic knowledge into the predictor, by modifying its architecture, its training process or by other means
 
 ---
 
 ## Structuring
+
 
 {{< image src="./images/workflow-structuring.svg" alt="Overview of structuring injection mechanism" width="80%" >}}
 
@@ -349,3 +351,160 @@ How can we inject symbolic knowledge into sub-symbolic predictors?
 {{% /section %}}
 
 ---
+
+## Overview
+
+SKI methods: theory and practice
+
+---
+
+{{% section %}}
+
+## Knowledge injection via Network Structuring (KINS)
+
+---
+
+## Fuzzification
+
+| Formula                  | C. interpretation                                      | Formula                                       | C. interpretation                      |
+|--------------------------|--------------------------------------------------------|-----------------------------------------------|----------------------------------------|
+| $[[ \neg \phi ]]$        | $\eta(1 - [[ \phi ]])$                                 | $[[ \phi \le \psi ]]$                         | $\eta(1 + [[ \psi ]] - [[ \phi ]])$    |
+| $[[ \phi \wedge \psi ]]$ | $\eta(\min([[ \phi ]], [[ \psi ]]))$                   | $[[ class(\bar{X}, {y}_i) \leftarrow \psi ]]$ | $[[ \psi ]]^{*}$                       |
+| $[[ \phi \vee \psi ]]$   | $\eta(\max([[ \phi ]], [[ \psi ]]))$                   | $[[ \text{expr}(\bar{X}) ]]$                  | $\text{expr}([[ \bar{X} ]])$           |
+| $[[ \phi = \psi ]]$      | $\eta([[ \neg( \phi \ne \psi ) ]])$                    | $[[ \mathtt{true} ]]$                         | $1$                                    |
+| $[[ \phi \ne \psi ]]$    | $\eta(\| [[ \phi ]] - [[ \psi ]]\|)$                   | $[[ \mathtt{false} ]]$                        | $0$                                    |
+| $[[ \phi > \psi ]]$      | $\eta(\max(0, \frac{1}{2} + [[ \phi ]] - [[ \psi ]]))$ | $[[ X ]]$                                     | $x$                                    |
+| $[[ \phi \ge \psi ]]$    | $\eta(1 + [[ \phi ]] - [[ \psi ]])$                    | $[[ k ]]$                                     | $k$                                    |
+| $[[ \phi < \psi ]]$      | $\eta(\max(0, \frac{1}{2} + [[ \psi ]] - [[ \phi ]]))$ | $[[ p(\bar{X}) ]]^{**}$                       | $[[ \psi_1 \vee \ldots \vee \psi_k ]]$ |
+
+
+> $^{*}$ encodes the value for the $i^{\text{th}}$ output  
+> $^{**}$ assuming $p$ is defined by $k$ clauses of the form:  
+> ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$
+
+---
+
+## Injector (pt.1)
+
+{{< image src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" width="80%" >}}
+
+---
+
+## Injector (pt. 2)
+
+{{< image src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" width="80%" >}}
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Practical example with KINS
+The primate splice-junction gene sequences dataset (PSJGS)
+
+---
+
+## PSJGS classification task
+
+The PSJGS dataset is a collection of DNA sequences from primate splice junction genes, where the task is to classify each sequence as either an _exon-intron_ (EI) or an _intron-exon_ (IE) sequence, or as _not applicable_ (N).
+
+{{% multicol %}}
+
+{{% col %}}
+
+<div style="text-align: center;">Classification rules</div>
+
+```text
+EI-stop ::- @-3 'TAA'.
+EI-stop ::- @-3 'TAG'.
+EI-stop ::- @-3 'TGA'.
+EI-stop ::- @-4 'TAA'.
+EI-stop ::- @-4 'TAG'.
+EI-stop ::- @-4 'TGA'.
+EI-stop ::- @-5 'TAA'.
+EI-stop ::- @-5 'TAG'.
+EI-stop ::- @-5 'TGA'.
+
+IE-stop ::- @1 'TAA'.
+IE-stop ::- @1 'TAG'.
+IE-stop ::- @1 'TGA'.
+IE-stop ::- @2 'TAA'.
+IE-stop ::- @2 'TAG'.
+IE-stop ::- @2 'TGA'.
+IE-stop ::- @3 'TAA'.
+IE-stop ::- @3 'TAG'.
+IE-stop ::- @3 'TGA'.
+
+pyramidine-rich :- 6 of (@-15 'YYYYYYYYYY').
+
+EI :- @-3 'MAGGTRAGT', not(EI-stop).
+
+IE :- pyramidine-rich, @-3 'YAGG', not(IE-stop).
+```
+
+{{% /col %}}
+
+{{% col %}}
+
+<div style="text-align: center;">Examples of DNA sequences</div>
+
+```csv
+Class, Id, DNA-sequence
+
+EI,ATRINS-DONOR-521,CCAGCTGCAT...AGCCAGTCTG
+EI,ATRINS-DONOR-905,AGACCCGCCG...GTGCCCCCGC
+EI,BABAPOE-DONOR-30,GAGGTGAAGG...CACGGGGATG
+...
+IE,ATRINS-ACCEPTOR-701,TTCAGCGGCC...GCCCTGTGGA
+IE,ATRINS-ACCEPTOR-1678,GGACCTGCTC...GGGGGCTCTA
+IE,BABAPOE-ACCEPTOR-801,GCGGTTGATT...AAGATGAAGG
+...
+N,AGMKPNRSB-NEG-1,CAAAAGAACA...CAAGGCTACA
+N,AGMORS12A-NEG-181,AGGGAGGTGT...GGGCATGGGG
+N,AGMORS9A-NEG-481,TGGTCAATTC...TCTTGCTCTG
+...
+
+3190 Records
+```
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+---
+
+## Logic rules to inject (pt. 1)
+
+| Class | Logic rules                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|:------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| EI    | $class(\bar{X}, ei) ← X_{-3} = m ∧ X_{-2} = a ∧ X_{-1} = g ∧ X_{+1} = g ∧ X_{+2} = t ∧{} $ <br> <span style="padding-left: 7.5em;"></span> $X_{+3} = a = r ∧ X_{+4} = a ∧ X_{+5} = g ∧ X_{+6} = t ∧ ¬(eiStop(\bar{X}))$ <br><br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = a ∧ X_{-1} = a$ <br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = a ∧ X_{-1} = g$ <br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = g ∧ X_{-1} = a$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = a ∧ X_{-2} = a$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = a ∧ X_{-2} = g$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = g ∧ X_{-2} = a$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = a ∧ X_{-3} = a$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = a ∧ X_{-3} = g$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = g ∧ X_{-3} = a$ |
+
+---
+
+## Logic rules to inject (pt. 2)
+
+
+| Class | Logic rules                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|:------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IE    | $class(\bar{X}, ie) ← pyramidineRich(\bar{X}) ∧ ¬(ieStop(\bar{X})) ∧ X_{-3} = y ∧ X_{-2} = a ∧ X_{-1} = g ∧ X_{+1} = g$ <br><br> $pyramidineRich(\bar{X}) ← 6 ≤ (X_{-15} = y + ... + X_{-6} = y)$ <br><br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = a ∧ X_{+4} = a$ <br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = a ∧ X_{+4} = g$ <br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = g ∧ X_{+4} = a$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = a ∧ X_{+5} = a$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = a ∧ X_{+5} = g$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = g ∧ X_{+5} = a$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = a ∧ X_{+6} = a$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = a ∧ X_{+6} = g$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = g ∧ X_{+6} = a$ |
+
+---
+
+## Jump to the code!
+
+TBD!!!
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Knowledge injection via Lambda Layer (KILL)
+
+---
+
+{{% /section %}}
+
+
