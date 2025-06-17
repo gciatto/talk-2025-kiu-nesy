@@ -270,3 +270,74 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 - These approaches are _not purely symbolic_, but they are _not purely numeric_ either, so we call the overall category __"sub-symbolic"__
 
 {{% /section %}}
+
+---
+
+{{< slide id="ski" >}}
+
+# Symbolic Knowledge Injection (SKI)
+
+How to inject symbolic knowledge into sub-symbolic predictors
+
+---
+
+{{% section %}}
+
+## Definition and Motivation (pt. 1)
+
+
+> Any algorithmic procedure affecting how sub-symbolic predictors draw their inferences in such a way that predictions are either _computed_ as a function of, or _made consistent_ with, some given symbolic knowledge.
+
+---
+
+## Definition and Motivation (pt. 2)
+
+- **Improve predictive performance**: by injecting symbolic knowledge, we can 
+  - _guide_ the learning process in order to _penalise_ inconsistencies with the symbolic knowledge, or
+  - _structure_ the model's architecture to _mimic_ the symbolic knowledge
+
+- **Enhance interpretability**: with SKI we can make predictors that are
+  - interpretable by _transparent box design_, as they are built to mimic symbolic knowledge
+  - interpretable using _symbols as constraints_, as they are built to respect symbolic knowledge
+
+- **Robustness to data degradation**: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of noisy or scarcity of data
+
+- **Enhance fairness**: by incorporating symbolic knowledge about fairness constraints, we can ensure that sub-symbolic models make decisions that align with ethical considerations
+
+- **And more**: SKI can simplify the predictor's architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Concept (pt. 1)
+
+---
+
+## Concept (pt. 2)
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Overview
+
+---
+
+## Structuring
+
+---
+
+## Constraining
+
+---
+
+## Embedding
+
+{{% /section %}}
+
+---
