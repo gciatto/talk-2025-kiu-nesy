@@ -330,13 +330,19 @@ How to inject symbolic knowledge into sub-symbolic predictors
 
 ## Structuring
 
+{{< image src="./images/workflow-structuring.svg" alt="Overview of structuring injection mechanism" width="80%" >}}
+
 ---
 
 ## Constraining
 
+{{< image src="./images/workflow-constraining.svg" alt="Overview of constraining injection mechanism" width="80%" >}}
+
 ---
 
 ## Embedding
+
+{{< image src="./images/workflow-embedding.svg" alt="Overview of embedding injection mechanism" width="80%" >}}
 
 {{% /section %}}
 
