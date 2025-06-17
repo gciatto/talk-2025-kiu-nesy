@@ -326,6 +326,8 @@ How to inject symbolic knowledge into sub-symbolic predictors
 
 ## Overview
 
+How can we inject symbolic knowledge into sub-symbolic predictors?
+
 ---
 
 ## Structuring
