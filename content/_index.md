@@ -118,10 +118,10 @@ Two broad categories of AI approaches:
 
 #### Available actions
 
-- $grab(X)`: grabs block $X$ from the table
-- $put(X)`: puts block $X$ on the table
-- $stack(X, Y)`: stacks block $X$ on top of block $Y`
-- $unstack(X, Y)`: un-stacks block $X$ from block $Y`
+- `grab(X)`: grabs block `X` from the table
+- `put(X)`: puts block `X` on the table
+- `stack(X, Y)`: stacks block `X` on top of block `Y`
+- `unstack(X, Y)`: un-stacks block `X` from block `Y`
 
 {{% /col %}}
 {{% /multicol %}}
@@ -242,10 +242,10 @@ Focus on the target feature:
 <br>
 
 - __Local__ $\approx$ "symbolic": each symbol has a clear, distinct meaning
-    + e.g. `"bear"$ is a symbol denoting a crisp category (either the animal is a bear or not)
+    + e.g. `"bear"` is a symbol denoting a crisp category (either the animal is a bear or not)
 
 - __Distributed__ $\approx$ "non-symbolic": symbols do not have a clear meaning per se, but the whole representation does
-    + e.g. `"swim"$ is fuzzy capability: one animal may be (un)able to swim to some extent
+    + e.g. `"swim"` is fuzzy capability: one animal may be (un)able to swim to some extent
 
 <br>
 
@@ -283,6 +283,84 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 - These approaches are _not purely symbolic_, but they are _not purely numeric_ either, so we call the overall category __"sub-symbolic"__
 
 {{% /section %}}
+
+---
+
+## Long-standing dualism
+
+### Intuition vs. Reasoning
+
+1. Esprit de _finesse_ vs. Esprit de _géométrie_ (Philosophy) --- [Blaise Pascal, 1669](https://en.wikipedia.org/wiki/Pens%C3%A9es)
+2. _Cognitive_ vs. _Behavioural_ Psychology --- [B.F. Skinner, 1950s](https://doi.org/10.1111/j.2044-8295.1985.tb01953.x)
+3. _System 1_ (fast, intuitive) vs. _System 2_ (slow, rational) --- [Daniel Kahneman, 2011](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow)
+
+## 
+
+{{% fragment %}}
+{{% multicol %}}
+{{% col %}}
+#### Sub-symbolic AI
+
+- Provides mechanisms emulating human-like _intuition_
+- _Quick_, possibly _error-prone_, but often _effective_
+- Requires _learning_ from data 
+- Often _opaque_, hard to interpret or explain
+{{% /col %}}
+{{% col %}}
+#### Symbolic AI
+
+- Provides mechanisms emulating human-like _reasoning_
+- _Slow_, but _precise_ and _verifiable_
+- Requires symbolic _modeling_ and _encoding_ knowledge
+- Often _transparent_, easier to interpret and explain
+{{% /col %}}
+{{% /multicol %}}
+{{% /fragment %}}
+
+--- 
+
+## Need for integration
+
+- the [NeSy community](https://www.nesy-ai.org/) has long recognized the _complementarity_ among symbolic and sub-symbolic approaches...
+- ... with a focus on __neural-networks__ (_NN_) based sub-symbolic methods, as they are very _flexible_
+
+{{% fragment %}}
+
+### Patterns of _integration_ or _combination_ (cf. [Bhuyan et al., 2024](https://link.springer.com/article/10.1007/s00521-024-09960-z))
+
+1. `Symbolic Neuro-Symbolic`: symbols $\rightarrow$ vectors $\rightarrow$ NNs $\rightarrow$ vectors $\rightarrow$ symbols
+    + e.g. 
+2. `Symbolic[Neuro]`: symbolic module $\xrightarrow{invokes}$ NN $\rightarrow $ output
+3. `Neuro | Symbolic`: NN $\xrightarrow{cooperates}$ symbolic module $\xrightarrow{cooperates}$ NN $\rightarrow$ ...
+4. `Neuro-Symbolic → Neuro`: symbolic knowledge $\xrightarrow{influences}$ NN
+5. <code>Neuro<sub>Symbolic</sub></code>: symbolic knowledge $\xrightarrow{constrains}$ NN
+6. `Neuro[Symbolic]`: symbolic module $\xrightarrow{embedded in}$ NN
+
+{{% /fragment %}}
+
+---
+
+## Focus on two main approaches
+
+(cf. [Ciatto et al., 2024](https://doi.org/10.1145/3645103))
+
+- Symbolic Knowledge **Extraction** (_SKE_): extracting symbolic knowledge from sub-symbolic models
+    * for the sake of _explainability_ and _interpretability_ in machine learning
+
+- Symbolic Knowledge **Injection** (_SKI_): injecting symbolic knowledge into sub-symbolic models
+    * for the sake of _trustworthiness_ and _robustness_ in machine learning
+
+{{% fragment %}}
+Both require some basic understanding of how machine learning works
+{{% /fragment %}}
+
+---
+
+# Machine Learning 101
+
+---
+
+TBD
 
 ---
 
