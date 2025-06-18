@@ -273,6 +273,72 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 
 ---
 
+{{< slide id="ske" >}}
+
+# Symbolic Knowledge Extraction (SKE)
+
+How to extract symbolic knowledge from sub-symbolic predictors
+
+---
+
+{{% section %}}
+
+## Definition and Motivation (pt. 1)
+
+> any _algorithmic procedure_ accepting trained sub-symbolic predictors as input and producing _symbolic_ knowledge as output, so that the extracted knowledge reflects the behaviour of the predictor with high _fidelity_.
+
+---
+
+## Definition and Motivation (pt. 2)
+
+- **Explainable AI (XAI)**: SKE methods are often used to provide explanations for the decisions made by sub-symbolic predictors, making them more interpretable and understandable to humans (a.k.a. _post-hoc explainability_)
+  - _local explanations_: explanations for individual predictions
+  - _global explanations_: explanations for the overall behaviour of the predictor
+  
+- **Knowledge discovery**: SKE methods can help discover patterns and relationships in the data that may not be immediately apparent, thus providing insights into the underlying processes
+
+- **Model compression**: SKE methods can simplify complex sub-symbolic models by extracting symbolic rules that approximate their behaviour, thus reducing the model's size and complexity
+
+
+{{% /section %}}
+ 
+---
+
+{{% section %}}
+
+## Concepts
+
+{{% multicol %}}
+
+{{% col %}}
+
+{{< image src="./images/nn-iris.png" alt="Example of a neural network trained on the Iris dataset" width="100%" max-h="60vh" >}}
+
+{{% /col %}}
+
+{{% col %}}
+
+<div style="margin-top: 10vh; margin-left: 5vw;">
+
+| Logic Rule                                                                                                   |
+|--------------------------------------------------------------------------------------------------------------|
+| Class = setosa ← PetalWidth ≤ 1.0                                                                            |
+| Class = versicolor ← PetalLength > 4.9 ∧ <br><div style="margin-left: 15vw;"> SepalWidth ∈ [2.9, 3.2] </div> |
+| Class = versicolor ← PetalWidth > 1.6                                                                        |
+| Class = virginica ← SepalWidth ≤ 2.9                                                                         |
+| Class = virginica ← SepalLength ∈ [5.4, 6.3]                                                                 |
+| Class = virginica ← PetalWidth ∈ [1.0, 1.6]                                                                  |
+
+</div>
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+{{% /section %}}
+
+---
+ 
 {{< slide id="ski" >}}
 
 # Symbolic Knowledge Injection (SKI)
