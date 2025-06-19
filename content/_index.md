@@ -772,6 +772,7 @@ SKI methods: theory and practice
 {{% section %}}
 
 ## Knowledge injection via Network Structuring (KINS)
+(ref. [Magnini et al., 2023](https://doi.org/10.1093/LOGCOM/EXAD037))
 
 ---
 
@@ -913,6 +914,7 @@ TBD!!!
 {{% section %}}
 
 ## Knowledge injection via Lambda Layer (KILL)
+(ref. [Magnini et al., 2022](https://ceur-ws.org/Vol-3261/paper5.pdf))
 
 ---
 
