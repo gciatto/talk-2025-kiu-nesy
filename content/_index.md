@@ -546,7 +546,93 @@ Notice that all decision trees subtend a partition of the input space, and that 
 
 ## Practical example with CART
 
+TBD
 
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Taxonomy of SKE methods (pt. 1)
+
+{{< image src="./images/ske-taxonomy.svg" alt="Taxonomy of SKE methods" width="80%" >}}
+
+---
+
+## Taxonomy of SKE methods (pt. 2)
+
+{{% multicol %}}
+
+{{% col %}}
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="color: blue">
+Target AI task
+</h3>
+
+- _classification_<br> $f: 𝒳 ⊆ ℝⁿ → 𝒴 s.t. |𝒴| = k$
+
+- _regression_<br> $f: 𝒳 ⊆ ℝⁿ → 𝒴 ⊆ ℝᵐ$
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="color: blue">
+Input data
+</h3>
+
+- _binary_<br> $𝒳 ≡ {0, 1}ⁿ$
+
+- _discrete_<br> $𝒳 ∈ {x₁, ..., xₙ}ⁿ$
+
+- _continuous_<br> $𝒳 ⊆ ℝⁿ$
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+---
+
+## Taxonomy of SKE methods (pt. 3)
+
+{{% multicol %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Shape
+</h3>
+
+- _rule list_, ordered sequences of if-then-else rules
+
+- _decision tree_, hierarchical set of if-then-else rules involving a comparison among a variable and a constant
+
+- _decision table_, 2D tables summarising decisions for each possible assignment of the input variables
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Expressiveness
+</h3>
+
+- _propositional_, boolean statements + logic connectives, including arithmetic comparisons among variables and constants 
+
+- _fuzzy_, hierarchical set of if-then-else rules involving a comparison among a variable and a constant
+
+- _oblique_, boolean statements + logic connectives + arithmetic comparisons
+
+- _M-of-N_, any of the above + statements of the form "at least $k$ of the following statements are true"
+
+{{% /col %}}
+
+{{% /multicol %}}
 
 {{% /section %}}
 
