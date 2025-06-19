@@ -390,18 +390,62 @@ How to extract symbolic knowledge from sub-symbolic predictors
 
 - **Model compression**: SKE methods can simplify complex sub-symbolic models by extracting symbolic rules that approximate their behaviour, thus reducing the model's size and complexity
 
-
-{{% /section %}}
- 
 ---
 
-{{% section %}}
 
-## Concepts
+## Explainability vs Interpretability
+
+They are _not_ synonyms in spite of the fact that they are often used interchangeably!
 
 {{% multicol %}}
 
 {{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Explanation
+</h3>
+
+- elicits _relevant aspects_ of objects (to ease their interpretation)
+
+- it is an operation that transform poorly interpretable objects into _more interpretable_ ones
+
+- search of a _surrogate_ interpretable model
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Interpretation
+</h3>
+
+- binds objects with _meaning_ (what the human mind does)
+
+- it is _subjective_
+
+- it does not need to be measurable, only _comparisons_ 
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+---
+
+## Concepts
+
+Main entities and how to extract symbolic knowledge from sub-symbolic predictors
+
+---
+
+## Entities
+
+{{% multicol %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Sub-symbolic predictor
+</h3>
 
 {{< image src="./images/nn-iris.png" alt="Example of a neural network trained on the Iris dataset" width="100%" max-h="60vh" >}}
 
@@ -409,7 +453,12 @@ How to extract symbolic knowledge from sub-symbolic predictors
 
 {{% col %}}
 
+<h3 style="text-align: center; color: blue">
+Symbolic knowledge
+</h3>
+
 <div style="margin-top: 10vh; margin-left: 5vw;">
+
 
 | Logic Rule                                                                                                   |
 |--------------------------------------------------------------------------------------------------------------|
@@ -425,6 +474,79 @@ How to extract symbolic knowledge from sub-symbolic predictors
 {{% /col %}}
 
 {{% /multicol %}}
+
+---
+
+## How SKE works
+
+{{% multicol %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Decompositional SKE
+</h3>
+
+> if the method _needs_ to inspect (even partially) the internal parameters of the underlying black-box predictor, e.g., neuron biases or connection weights for NNs, or support vectors for SVMs
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Pedagogical SKE
+</h3>
+
+> if the algorithm _does not need_ to take into account any internal parameter, but it can extract symbolic knowledge by only relying on the predictor’s outputs.
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+{{% /section %}}
+
+---
+
+## Overview
+SKE methods: theory and practice
+
+---
+
+{{% section %}}
+
+## CART (pt. 1)
+Classification and regression trees (cf. [Breiman et al., 1984](https://doi.org/10.1201/9781315139470))
+
+---
+
+## CART (pt. 2)
+
+{{< image src="./images/dt-kyphosis.png" alt="Example of a decision tree" width="80%" max-h="60vh" >}}
+
+An example decision tree estimating the probability of kyphosis after spinal surgery, given the _age_ of the patient and the vertebra at which surgery was _start_ ed (rf. [wiki:dt-learning](https://en.wikipedia.org/w/index.php?title=Decision_tree_learning)).
+Notice that all decision trees subtend a partition of the input space, and that those trees themselves provide intelligible representations of _how_ predictions are attained.
+
+---
+
+## CART (pt. 3)
+
+1. generate a _synthetic_ dataset by using the predictions of the sub-symbolic predictor
+
+2. _train_ a decision tree on the synthetic dataset
+
+3. compute the _fidelity_ and repeat step 2 until satisfied
+
+4. [optional] rewrite the tree as a set of symbolic _rules_
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Practical example with CART
+
+
 
 {{% /section %}}
 
@@ -463,11 +585,7 @@ How to inject symbolic knowledge into sub-symbolic predictors
 
 - **And more**: SKI can simplify the predictor's architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting
 
-{{% /section %}}
-
 ---
-
-{{% section %}}
 
 ## Concepts
 Main entities and how to inject symbolic knowledge into sub-symbolic predictors
