@@ -637,6 +637,56 @@ Expressiveness
 {{% /section %}}
 
 ---
+
+{{% section %}}
+
+## Discussion
+
+{{% multicol %}}
+
+{{% col %}}
+
+### **Notable remarks**
+
+- discretisation of the input space
+
+- discretisation of the output space
+
+- features should have semantic meaning
+
+- rules constitutes global explanations
+
+{{% /col %}}
+
+{{% col %}}
+
+### **Limitations**
+
+- tabular data as input, no images
+
+- high dimensional datasets could lead to poorly readable rules
+
+- high variable input spaces could do the same
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+---
+
+## Future research activities
+
+- target images or highly dimensional data in general
+
+- target reinforcement learning (when based on NN)
+
+- target unsupervised learning
+
+- design and prototype your own extraction algorithm
+
+{{% /section %}}
+
+---
  
 {{< slide id="ski" >}}
 
@@ -994,5 +1044,86 @@ The poker hand data set (PHDS)
 
 ## Jump to the code!
 TBD!!!
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Taxonomy of SKI methods (pt. 1)
+
+{{< image src="./images/ski-taxonomy.svg" alt="Taxonomy of SKI methods" width="80%" >}}
+
+---
+
+## Taxonomy of SKI methods (pt. 2)
+
+- **input knowledge**: how is the knowledge to-be-injected represented?
+  - commonly, some sub-set of first-order logic (FOL)
+
+- **target predictor**: which predictors can knowledge be injected into?
+  - mostly, neural networks
+
+- **strategy**: how does injection actually work?
+  - _guided learning_: the input knowledge is used to _guide the training_ process  
+  - _structuring_: the _internal_ composition of the predictor is _(re-)structured_ to reflect the input knowledge  
+  - _embedding_: the input knowledge is _converted_ into numeric array form
+
+- **purpose**: why is knowledge injected in the first place?
+  - _knowledge manipulation_: improve / extend / reason about symbol knowledge—subsymbolically  
+  - _learning support_: improve the sub-symbolic predictor (e.g. speed, size, etc.)
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## Discussion
+
+{{% multicol %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Notable remarks
+</h3>
+
+- Knowledge should express relations about input-output pairs
+
+- embedding implies _extensional_ representation of knowledge
+
+- guided learning and structuring support _intensional_ knowledge
+
+- propositional knowledge implies binarising the I/O space
+
+{{% /col %}}
+
+{{% col %}}
+
+<h3 style="text-align: center; color: blue">
+Limitations
+</h3>
+
+- Recursive data structures are natively not supported
+
+- extensional representation cost storage
+
+- guided learning works poorly with lacking data
+
+{{% /col %}}
+
+{{% /multicol %}}
+
+---
+
+## Future research activities
+
+- _foundational_<br> address recursion
+
+- _practical_<br> find a language that is a good balance between expressiveness and ease of use
+
+- _target_<br> apply to large language models 
 
 {{% /section %}}
