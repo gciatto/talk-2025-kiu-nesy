@@ -329,7 +329,6 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 ### Patterns of _integration_ or _combination_ (cf. [Bhuyan et al., 2024](https://link.springer.com/article/10.1007/s00521-024-09960-z))
 
 1. `Symbolic Neuro-Symbolic`: symbols $\rightarrow$ vectors $\rightarrow$ NNs $\rightarrow$ vectors $\rightarrow$ symbols
-    + e.g.
 2. `Symbolic[Neuro]`: symbolic module $\xrightarrow{invokes}$ NN $\rightarrow $ output
 3. `Neuro | Symbolic`: NN $\xrightarrow{cooperates}$ symbolic module $\xrightarrow{cooperates}$ NN $\rightarrow$ ...
 4. `Neuro-Symbolic → Neuro`: symbolic knowledge $\xrightarrow{influences}$ NN
@@ -414,14 +413,201 @@ Both require some basic understanding of how _supervised_ __machine learning__ w
 
 ## Supervised Machine Learning 101 (pt. 3)
 
-Let's formalize the problem (1/2)
+### Let's formalize the problem (1/2)
+<br>
 
-1. Let's assume the data represented as a set of vectors in $\mathcal{D} \subset \mathbb{R}^n$ s.t. $|\mathcal{D}| = m$
-    - e.g. $\mathcal{D} = \{(x_1, y_1, c_1), (x_2, y_2, c_2), \ldots, (x_m, y_m, c_m)\}$ for the classification dataset
-    - e.g. $\mathcal{D} = \{(x_1, y_1), (x_2, y_2), \ldots, (x_m, y_m)\}$ for the regression dataset
-2. Let $\mathcal{X}$ (resp. $\mathcal{Y}$) be the input (resp. output or target) space of the data at hand, s.t. $\mathcal{D} = \mathcal{X} \times \mathcal{Y}$
+1. Let's assume the data represented as a set of vectors in a __dataset__ $D \subset \mathbb{R}^n$ s.t. $|D| = m$
+    - e.g. $D = \{(x_1, y_1, c_1), (x_2, y_2, c_2), \ldots, (x_m, y_m, c_m)\}$ for the classification dataset
+    - e.g. $D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_m, y_m)\}$ for the regression dataset
+2. Let $\mathcal{X}$ (resp. $\mathcal{Y}$) be the _input_ (resp. output or _target_) _space_ of the data at hand
+    - so $\exists X \in \mathcal{X}$ and $\exists Y \in \mathcal{Y}$ s.t. $(X, Y) \equiv D$
+    - i.e. $X$ is the _input data_ and $Y$ is the _target data_ in $D$
 
 {{< image src="./images/target.png" alt="Modelling of the dataset" width="50%" max-h="60vh" >}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 4)
+
+### Let's formalize the problem (2/2)
+<br>
+
+3. Let $\mathcal{H} = \lbrace f \mid f: \mathcal{X} \to \mathcal{Y}\rbrace$ be the set of all possible functions mapping $\mathcal{X}$ to $\mathcal{Y}$
+    - i.e. the so-called __hypothesis space__
+4. We need now to find __the best__ $f^* \in \mathcal{H}$
+    - best w.r.t to what?
+5. We need to define a __loss function__ $\mathcal{L}$ that quantifies the _difference_ between the _predicted output_ $f(X)$ and the _true output_ $Y$
+    - for any possible $f \in \mathcal{H}$
+6. So, our __learning problem__ is as simple as a __search problem__ in the hypothesis space:
+    $$ f^* = \arg\min_{f \in \mathcal{H}} \mathcal{L}(f(X), Y) $$
+7. Ok, but in _practice_, how do we do that?
+
+---
+
+## Supervised Machine Learning 101 (pt. 5)
+
+### Let's solve the problem
+
+<br>
+
+1. How to _explore_ the _hypothesis space_, depends on what _sorts of functions_ it contains
+2. There exist several sorts functions for which an __exploration algorithm__ is known
+    - e.g. $\mathcal{H}$ $\equiv$ polynomials of degree $1$ (i.e. _lines_: $f(\bar{x}) = \beta + \bar{\omega} \cdot \bar{x} = \beta + \omega_1 x_1 + \ldots + \omega_n x_n$)
+    - e.g. $\mathcal{H}$ $\equiv$ polynomials of degree $2$ (i.e. _parabolas_: $f(\bar{x}) = \beta + \omega_1 x_1 + \ldots + \omega_n x_n + \omega_1^2 x_1^2 + \ldots + \omega_n^2 x_n^2$)
+    - e.g. $\mathcal{H}$ $\equiv$ decision trees (i.e. _if-then-else_ rules: $f(\bar{x}) = \text{if } x_1 \leq c_1 \text{ then } y_1 \text{ else if } x_2 \leq c_2 \text{ then } y_2 \ldots$)
+    - e.g. $\mathcal{H}$ $\equiv$ $k$-nearest neighbors ($f(\bar{x}) = \text{class of (most of) the } k \text{ nearest neighbors of } \bar{x}$)
+    - e.g. $\mathcal{H}$ $\equiv$ neural networks (i.e. _NNs_: $f(\bar{x}) = \sigma(\beta + \bar{\omega} \cdot \bar{x})$ where $\sigma$ is a non-linear activation function, e.g. sigmoid, ReLU, etc.)
+
+{{% fragment %}}
+> __Remark__: because of the ["no free lunch" theorem](https://en.wikipedia.org/wiki/No_free_lunch_theorem), _no_ single algorithm is the best in _the general case_
+>  - i.e., each learning problem may be better addressed by a different learning algorithm
+{{% /fragment %}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 6)
+
+### Let's solve the problem with __neural networks__
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./images/neuron.png" alt="Functioning of a single neuron" width="100%" max-h="60vh" >}}
+
+Single neuron
+{{% /col %}}
+{{% col %}}
+{{< image src="./images/neural-network.png" alt="Functioning of a feed-forward neural network" width="100%" max-h="60vh" >}}
+
+(Feed-forward)
+<br>
+Neural network $\equiv$ cascade of _layers_
+{{% /col %}}
+{{% col %}}
+{{< image src="./images/nn-zoo.png" alt="Many sorts of neural architectures" width="100%" max-h="60vh" >}}
+
+[Many admissible architectures](https://www.asimovinstitute.org/neural-network-zoo/)
+{{% /col %}}
+{{% /multicol %}}
+
+{{% fragment %}}
+> __Remark__: NN are [universal approximators](https://en.wikipedia.org/wiki/Universal_approximation_theorem), provided that they have enough neurons
+{{% /fragment %}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 7)
+
+### Let's solve the problem with __gradient descent__
+
+- NNs (and other ML algorithms) explore the hypothesis space by using a _gradient descent_ algorithm
+- In this case:
+    * the hypothesis space _$\mathcal{H}$ $\equiv$ "the set of all possible NNs with a given architecture"_
+        + e.g. 4 input neurons, 2 hidden layers with 3 neurons each, and 1 output neuron, all layers fully connected, using ReLU activation functions
+    * the loss function _$\mathcal{L}$ $\equiv$ "the difference between the predicted output and the true output"_
+        + e.g. $\mathcal{L}(f(X), Y) = \frac{1}{n} \sum_{i=1}^{n} (f(x_i) - y_i)^2$ __(mean-squared error)__ for regression
+        + e.g. $\mathcal{L}(f(X), Y) = -\sum_{i=1}^{n} y_i \log(f(x_i)) + (1 - y_i) \log(1 - f(x_i))$ __(cross-entropy)__ for classification
+    * the algorithm _initializes the weights_ of the NN __randomly__, and then iteratively updates them by minimising the __gradient of the loss function__ w.r.t. the _weights_
+        + i.e. $w_{i+1} = w_i - \eta \nabla_w \mathcal{L}(f(X), Y)$ where $\eta$ is the learning rate
+
+    {{< image src="./images/gradient-descent.jpg" alt="Gradient descent algorithm (visualization of local minima)" width="45%" max-h="40vh" >}}
+    <span width="10%"/>
+    {{< image src="./images/train-loss.png" alt="Training loss over time" width="45%" max-h="40vh" >}}
+
+    * the approach is _greedy_ and sensitive to _local minima_, but very _effective_ in practice
+
+---
+
+## Supervised Machine Learning 101 (pt. 8)
+
+### How things may go wrong – *Under*fitting vs. *Over*fitting
+
+{{< image src="./images/bias-variance-tradeoff-class.png" width="60%" max-h="40vh" alt="Bias-variance tradeoff for classification" >}}
+
+{{< image src="./images/bias-variance-tradeoff-regr.png" width="60%" max-h="40vh" alt="Bias-variance tradeoff for regression" >}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 9)
+
+### How to address: Test-Set Separation
+
+{{< image src="./images/train-test-separation.webp" alt="Train-test separation for supervised learning" width="100%" max-h="40vh" >}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 10)
+
+### How things may go wrong – Training is __stochastic__
+
+{{% multicol %}}
+{{% col %}}
+Depending on its start, training may yield _different results_:
+
+{{< image src="./images/gradient-descent.jpg" alt="Gradient descent algorithm (visualization of local minima)" width="100%" max-h="40vh" >}}
+{{% /col %}}
+{{% col %}}
+Solution is __coss-validation__:
+
+{{< image src="./images/k-fold.svg" alt="K-fold cross validation" width="100%" max-h="40vh" >}}
+{{% /col %}}
+{{% /multicol %}}
+
+1. Train the _$k$ different models_ (same architecture) on $k$ different subsets of the training set
+2. _Average_ the _results_ of the $k$ models
+3. If average is good, the model is considered more _robust_ and _reliable_
+     * useful when _comparing_ different _architectures_ or hyper-parameters
+
+---
+
+## Supervised Machine Learning 101 (pt. 11)
+
+### How things may go wrong – Data may not be numeric
+
+<br>
+
+#### Solution: __change encoding__
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./images/ordinal-encoding.png" alt="Example of ordinal encoding" width="80%" max-h="60vh" >}}
+
+(_Ordinal_ encoding)
+{{% /col %}}
+{{% col %}}
+{{< image src="./images/one-hot-encoding.png" alt="Example of one-hot encoding" width="100%" max-h="60vh" >}}
+
+(_One-hot_ encoding)
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 12)
+
+### How things may go wrong – Data may _not_ be __separable__ by a proper function...
+
+<br>
+
+#### Solution: __feature engineering__ (map data into a different space)
+
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./images/non-separable.png" alt="Non-linearly-separable data" width="100%" max-h="50vh" >}}
+
+Non-linearly-separable data ...
+<br>
+$(x, y)$
+{{% /col %}}
+{{% col %}}
+{{< image src="./images/non-separable-polar.png" alt="Linearly-separable data" width="100%" max-h="50vh" >}}
+
+... may be separable in _another space_
+<br>
+$(\rho = \sqrt{x^2 + y^2}$, $\theta = \arctan(y/x))$
+{{% /col %}}
+{{% /multicol %}}
+
 
 {{% /section %}}
 
