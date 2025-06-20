@@ -10,24 +10,21 @@ outputs = ["Reveal"]
 
 # Symbolic Knowledge Extraction and Injection:<br>Theory and Methods
 
+<span class="hint">(last built on: {{< today >}})</span>
+
 {{< gc >}} and {{< mm >}}
 <br>Dipartimento di Informatica — Scienza e Ingegneria (DISI), Sede di Cesena,
 <br> Alma Mater Studiorum—Università di Bologna
 
-<br>
-<br>Mini-school @ WOA 2025, the 26th Workshop From Objects to Agents
+<br>[Mini-school](https://sites.google.com/view/woa2025/mini-school) @ [WOA 2025, the 26th Workshop From Objects to Agents](https://sites.google.com/view/woa2025)
 <br>2nd July 2025, Trento, Italy
 
 <br>
 <span class="hint">
-<br>This talk is partially supported by the “ENGINES — ENGineering INtElligent Systems around intelligent agent technologies”
-<br>project funded by the Italian MUR program “PRIN 2022” under grant number 20229ZXBZM.</span>
-
+This talk is partially supported by the “ENGINES — ENGineering INtElligent Systems around intelligent agent technologies”
+project funded by the Italian MUR program “PRIN 2022” under grant number 20229ZXBZM.
+</span>
 <br>{{< image src="./images/engines_logo.jpg" alt="ENGINES project logo" width="70px" >}}
-
-<br>
-<br>
-<span class="hint">(last built on: {{< today >}})</span>
 
 ---
 
