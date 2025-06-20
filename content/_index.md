@@ -294,7 +294,7 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 2. _Cognitive_ vs. _Behavioural_ Psychology --- [B.F. Skinner, 1950s](https://doi.org/10.1111/j.2044-8295.1985.tb01953.x)
 3. _System 1_ (fast, intuitive) vs. _System 2_ (slow, rational) --- [Daniel Kahneman, 2011](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow)
 
-## 
+##
 
 {{% fragment %}}
 {{% multicol %}}
@@ -303,7 +303,7 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 
 - Provides mechanisms emulating human-like _intuition_
 - _Quick_, possibly _error-prone_, but often _effective_
-- Requires _learning_ from data 
+- Requires _learning_ from data
 - Often _opaque_, hard to interpret or explain
 {{% /col %}}
 {{% col %}}
@@ -317,7 +317,7 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 {{% /multicol %}}
 {{% /fragment %}}
 
---- 
+---
 
 ## Need for integration
 
@@ -329,7 +329,7 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
 ### Patterns of _integration_ or _combination_ (cf. [Bhuyan et al., 2024](https://link.springer.com/article/10.1007/s00521-024-09960-z))
 
 1. `Symbolic Neuro-Symbolic`: symbols $\rightarrow$ vectors $\rightarrow$ NNs $\rightarrow$ vectors $\rightarrow$ symbols
-    + e.g. 
+    + e.g.
 2. `Symbolic[Neuro]`: symbolic module $\xrightarrow{invokes}$ NN $\rightarrow $ output
 3. `Neuro | Symbolic`: NN $\xrightarrow{cooperates}$ symbolic module $\xrightarrow{cooperates}$ NN $\rightarrow$ ...
 4. `Neuro-Symbolic → Neuro`: symbolic knowledge $\xrightarrow{influences}$ NN
@@ -351,16 +351,79 @@ According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_
     * for the sake of _trustworthiness_ and _robustness_ in machine learning
 
 {{% fragment %}}
-Both require some basic understanding of how machine learning works
+Both require some basic understanding of how _supervised_ __machine learning__ works
 {{% /fragment %}}
 
 ---
 
-# Machine Learning 101
+{{< slide id="ml">}}
+
+{{% section %}}
+
+# Supervised Machine Learning 101
 
 ---
 
-TBD
+## Supervised Machine Learning 101 (pt. 1)
+
+1. Let's say you have a __dataset__ of vectors in $\mathbb{R}^n$
+
+{{% multicol %}}
+{{% col %}}
+2. Let's say the vectors are _labelled differently_ (2 colors)
+
+{{< image src="./images/classification-1.png" alt="Example of vectors to be separated" width="100%" max-h="60vh" >}}
+
+3. Let's say you want to __separate__ them
+{{% /col %}}
+{{% col %}}
+2. Let's say the vectors are _aligned_ (along a curve)
+
+{{< image src="./images/regression-1.png" alt="Example of vectors to be interpolated" width="100%" max-h="60vh" >}}
+
+3. Let's say you want to __interpolate__ them
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Supervised Machine Learning 101 (pt. 2)
+
+4. Then, need to _approximate_ the function _$f$_...
+
+{{% multicol %}}
+{{% col %}}
+4. ... __separating them__ (the sigmoid here)
+
+{{< image src="./images/classification-2.png" alt="Example of vectors to be separated, and the corresponding decision boundary" width="100%" max-h="60vh" >}}
+
+5. The function $f$ is the __decision boundary__ (a.k.a. _classifier_)
+{{% /col %}}
+{{% col %}}
+4. ...__interpolating them__ (the parabola here)
+
+{{< image src="./images/regression-2.png" alt="Example of vectors to be interpolated, and the corresponding curve" width="100%" max-h="60vh" >}}
+
+5. The function $f$ is the __regression curve__ (a.k.a. _regressor_)
+{{% /col %}}
+{{% /multicol %}}
+
+6. <span style="color: red;">How to compute such a function $f$?</span>
+
+---
+
+## Supervised Machine Learning 101 (pt. 3)
+
+Let's formalize the problem (1/2)
+
+1. Let's assume the data represented as a set of vectors in $\mathcal{D} \subset \mathbb{R}^n$ s.t. $|\mathcal{D}| = m$
+    - e.g. $\mathcal{D} = \{(x_1, y_1, c_1), (x_2, y_2, c_2), \ldots, (x_m, y_m, c_m)\}$ for the classification dataset
+    - e.g. $\mathcal{D} = \{(x_1, y_1), (x_2, y_2), \ldots, (x_m, y_m)\}$ for the regression dataset
+2. Let $\mathcal{X}$ (resp. $\mathcal{Y}$) be the input (resp. output or target) space of the data at hand, s.t. $\mathcal{D} = \mathcal{X} \times \mathcal{Y}$
+
+{{< image src="./images/target.png" alt="Modelling of the dataset" width="50%" max-h="60vh" >}}
+
+{{% /section %}}
 
 ---
 
@@ -385,7 +448,7 @@ How to extract symbolic knowledge from sub-symbolic predictors
 - **Explainable AI (XAI)**: SKE methods are often used to provide explanations for the decisions made by sub-symbolic predictors, making them more interpretable and understandable to humans (a.k.a. _post-hoc explainability_)
   - _local explanations_: explanations for individual predictions
   - _global explanations_: explanations for the overall behaviour of the predictor
-  
+
 - **Knowledge discovery**: SKE methods can help discover patterns and relationships in the data that may not be immediately apparent, thus providing insights into the underlying processes
 
 - **Model compression**: SKE methods can simplify complex sub-symbolic models by extracting symbolic rules that approximate their behaviour, thus reducing the model's size and complexity
@@ -423,7 +486,7 @@ Interpretation
 
 - it is _subjective_
 
-- it does not need to be measurable, only _comparisons_ 
+- it does not need to be measurable, only _comparisons_
 
 {{% /col %}}
 
@@ -622,7 +685,7 @@ Shape
 Expressiveness
 </h3>
 
-- _propositional_, boolean statements + logic connectives, including arithmetic comparisons among variables and constants 
+- _propositional_, boolean statements + logic connectives, including arithmetic comparisons among variables and constants
 
 - _fuzzy_, hierarchical set of if-then-else rules involving a comparison among a variable and a constant
 
@@ -687,7 +750,7 @@ Expressiveness
 {{% /section %}}
 
 ---
- 
+
 {{< slide id="ski" >}}
 
 # Symbolic Knowledge Injection (SKI)
@@ -707,7 +770,7 @@ How to inject symbolic knowledge into sub-symbolic predictors
 
 ## Definition and Motivation (pt. 2)
 
-- **Improve predictive performance**: by injecting symbolic knowledge, we can 
+- **Improve predictive performance**: by injecting symbolic knowledge, we can
   - _guide_ the learning process in order to _penalise_ inconsistencies with the symbolic knowledge, or
   - _structure_ the model's architecture to _mimic_ the symbolic knowledge
 
@@ -790,8 +853,8 @@ SKI methods: theory and practice
 | $[[ \phi < \psi ]]$      | $\eta(\max(0, \frac{1}{2} + [[ \psi ]] - [[ \phi ]]))$ | $[[ p(\bar{X}) ]]^{**}$                       | $[[ \psi_1 \vee \ldots \vee \psi_k ]]$ |
 
 
-> $^{*}$ encodes the value for the $i^{\text{th}}$ output  
-> $^{**}$ assuming $p$ is defined by $k$ clauses of the form:  
+> $^{*}$ encodes the value for the $i^{\text{th}}$ output
+> $^{**}$ assuming $p$ is defined by $k$ clauses of the form:
 > ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$
 
 ---
@@ -931,8 +994,8 @@ TBD!!!
 | \[\[\phi \ge \psi]]    | $\eta([[\psi]] - [[\phi]])$                          |   | $[[{k}]]$                                           | $k$                                  |
 | \[\[\phi < \psi]]      | $\eta(\frac{1}{2} + [[\phi]] - [[\psi]])$            |   | $[\mathrm{p}(\bar{X})]]^{**}$                       | $[[\psi_1 \vee \ldots \vee \psi_k]]$ |
 
-> $^{*}$ encodes the penalty for the $i^{\text{th}}$ neuron  
-> $^{**}$ assuming predicate $p$ is defined by $k$ clauses of the form:  
+> $^{*}$ encodes the penalty for the $i^{\text{th}}$ neuron
+> $^{**}$ assuming predicate $p$ is defined by $k$ clauses of the form:
 > ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$
 
 ---
@@ -978,13 +1041,13 @@ The poker hand data set (PHDS)
 <div style="margin-top: 25vh; margin-left: 5vw;">
 
 - Each record represents one poker hand
- 
+
 - 5 cards identified by 2 values: suit and rank
 
 - Classes: 10
- 
+
 - Training set: 25.010
- 
+
 - Test set: 1.000.000
 
 </div>
@@ -1068,12 +1131,12 @@ TBD!!!
   - mostly, neural networks
 
 - **strategy**: how does injection actually work?
-  - _guided learning_: the input knowledge is used to _guide the training_ process  
-  - _structuring_: the _internal_ composition of the predictor is _(re-)structured_ to reflect the input knowledge  
+  - _guided learning_: the input knowledge is used to _guide the training_ process
+  - _structuring_: the _internal_ composition of the predictor is _(re-)structured_ to reflect the input knowledge
   - _embedding_: the input knowledge is _converted_ into numeric array form
 
 - **purpose**: why is knowledge injected in the first place?
-  - _knowledge manipulation_: improve / extend / reason about symbol knowledge—subsymbolically  
+  - _knowledge manipulation_: improve / extend / reason about symbol knowledge—subsymbolically
   - _learning support_: improve the sub-symbolic predictor (e.g. speed, size, etc.)
 
 {{% /section %}}
@@ -1126,6 +1189,6 @@ Limitations
 
 - _practical_<br> find a language that is a good balance between expressiveness and ease of use
 
-- _target_<br> apply to large language models 
+- _target_<br> apply to large language models
 
 {{% /section %}}
