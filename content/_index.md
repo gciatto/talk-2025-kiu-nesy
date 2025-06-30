@@ -790,9 +790,56 @@ Notice that all decision trees subtend a partition of the input space, and that 
 
 {{% section %}}
 
-## Practical example with CART
+## Practical example of SKE
+The Adult dataset (cf. [Becker Barry and Kohavi Ronny, 1996](https://doi.org/10.24432/C5XW20))
 
-TBD
+---
+
+## Adult classification task
+
+The Adult dataset contains the records (48,842) of individuals based on census data (this dataset is also known as Census Income).
+The dataset has many features (14) related to the individuals' demographics, such as age, education, and occupation.
+The target feature is whether the individual earns more than $50,000 per year.
+
+<br>
+
+<div style="text-align: center; color: blue;">Examples of Adult records</div>
+
+<br>
+
+| age | workclass        | education | ... | hours-per-week | native-country | income |
+|-----|------------------|-----------|-----|----------------|----------------|--------|
+| 39  | State-gov        | Bachelors | ... | 40             | United-States  | <=50K  |
+| 50  | Self-emp-not-inc | Bachelors | ... | 13             | United-States  | <=50K  |
+| 38  | Private          | HS-grad   | ... | 40             | United-States  | <=50K  |
+| 53  | Private          | 11th      | ... | 40             | United-States  | <=50K  |
+| 28  | Private          | Bachelors | ... | 40             | Cuba           | <=50K  |
+| 37  | Private          | Masters   | ... | 40             | United-States  | <=50K  |
+| 49  | Private          | 9th       | ... | 16             | Jamaica        | <=50K  |
+| 52  | Self-emp-not-inc | HS-grad   | ... | 45             | United-States  | >50K   |
+| 31  | Private          | Masters   | ... | 50             | United-States  | >50K   |
+| 42  | Private          | Bachelors | ... | 40             | United-States  | >50K   |
+
+
+---
+
+## What we will do
+
+1. Download the Adult dataset and preprocess it
+
+2. Train a sub-symbolic predictor -- a *neural network* -- on the Adult dataset
+
+3. Use a *pedagogical SKE method* -- CART -- to extract symbolic knowledge from the trained neural network
+
+4. Visualise the extracted symbolic knowledge as a *decision tree* and as a set of *rules*
+
+---
+
+## Jump to the code
+
+GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/extraction.ipynb](https://github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/extraction.ipynb)
+
+{{< image src="./images/ske-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 
 {{% /section %}}
 
@@ -1058,107 +1105,6 @@ SKI methods: theory and practice
 
 {{% section %}}
 
-## Practical example with KINS
-The primate splice-junction gene sequences dataset (PSJGS)
-
----
-
-## PSJGS classification task
-
-The PSJGS dataset is a collection of DNA sequences from primate splice junction genes, where the task is to classify each sequence as either an _exon-intron_ (EI) or an _intron-exon_ (IE) sequence, or as _not applicable_ (N).
-
-{{% multicol %}}
-
-{{% col %}}
-
-<div style="text-align: center;">Classification rules</div>
-
-```text
-EI-stop ::- @-3 'TAA'.
-EI-stop ::- @-3 'TAG'.
-EI-stop ::- @-3 'TGA'.
-EI-stop ::- @-4 'TAA'.
-EI-stop ::- @-4 'TAG'.
-EI-stop ::- @-4 'TGA'.
-EI-stop ::- @-5 'TAA'.
-EI-stop ::- @-5 'TAG'.
-EI-stop ::- @-5 'TGA'.
-
-IE-stop ::- @1 'TAA'.
-IE-stop ::- @1 'TAG'.
-IE-stop ::- @1 'TGA'.
-IE-stop ::- @2 'TAA'.
-IE-stop ::- @2 'TAG'.
-IE-stop ::- @2 'TGA'.
-IE-stop ::- @3 'TAA'.
-IE-stop ::- @3 'TAG'.
-IE-stop ::- @3 'TGA'.
-
-pyramidine-rich :- 6 of (@-15 'YYYYYYYYYY').
-
-EI :- @-3 'MAGGTRAGT', not(EI-stop).
-
-IE :- pyramidine-rich, @-3 'YAGG', not(IE-stop).
-```
-
-{{% /col %}}
-
-{{% col %}}
-
-<div style="text-align: center;">Examples of DNA sequences</div>
-
-```csv
-Class, Id, DNA-sequence
-
-EI,ATRINS-DONOR-521,CCAGCTGCAT...AGCCAGTCTG
-EI,ATRINS-DONOR-905,AGACCCGCCG...GTGCCCCCGC
-EI,BABAPOE-DONOR-30,GAGGTGAAGG...CACGGGGATG
-...
-IE,ATRINS-ACCEPTOR-701,TTCAGCGGCC...GCCCTGTGGA
-IE,ATRINS-ACCEPTOR-1678,GGACCTGCTC...GGGGGCTCTA
-IE,BABAPOE-ACCEPTOR-801,GCGGTTGATT...AAGATGAAGG
-...
-N,AGMKPNRSB-NEG-1,CAAAAGAACA...CAAGGCTACA
-N,AGMORS12A-NEG-181,AGGGAGGTGT...GGGCATGGGG
-N,AGMORS9A-NEG-481,TGGTCAATTC...TCTTGCTCTG
-...
-
-3190 Records
-```
-
-{{% /col %}}
-
-{{% /multicol %}}
-
----
-
-## Logic rules to inject (pt. 1)
-
-| Class | Logic rules                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|:------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| EI    | $class(\bar{X}, ei) ← X_{-3} = m ∧ X_{-2} = a ∧ X_{-1} = g ∧ X_{+1} = g ∧ X_{+2} = t ∧{} $ <br> <span style="padding-left: 7.5em;"></span> $X_{+3} = a = r ∧ X_{+4} = a ∧ X_{+5} = g ∧ X_{+6} = t ∧ ¬(eiStop(\bar{X}))$ <br><br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = a ∧ X_{-1} = a$ <br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = a ∧ X_{-1} = g$ <br> $eiStop(\bar{X}) ← X_{-3} = t ∧ X_{-2} = g ∧ X_{-1} = a$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = a ∧ X_{-2} = a$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = a ∧ X_{-2} = g$ <br> $eiStop(\bar{X}) ← X_{-4} = t ∧ X_{-3} = g ∧ X_{-2} = a$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = a ∧ X_{-3} = a$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = a ∧ X_{-3} = g$ <br> $eiStop(\bar{X}) ← X_{-5} = t ∧ X_{-4} = g ∧ X_{-3} = a$ |
-
----
-
-## Logic rules to inject (pt. 2)
-
-
-| Class | Logic rules                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|:------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| IE    | $class(\bar{X}, ie) ← pyramidineRich(\bar{X}) ∧ ¬(ieStop(\bar{X})) ∧ X_{-3} = y ∧ X_{-2} = a ∧ X_{-1} = g ∧ X_{+1} = g$ <br><br> $pyramidineRich(\bar{X}) ← 6 ≤ (X_{-15} = y + ... + X_{-6} = y)$ <br><br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = a ∧ X_{+4} = a$ <br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = a ∧ X_{+4} = g$ <br> $ieStop(\bar{X}) ← X_{+2} = t ∧ X_{+3} = g ∧ X_{+4} = a$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = a ∧ X_{+5} = a$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = a ∧ X_{+5} = g$ <br> $ieStop(\bar{X}) ← X_{+3} = t ∧ X_{+4} = g ∧ X_{+5} = a$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = a ∧ X_{+6} = a$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = a ∧ X_{+6} = g$ <br> $ieStop(\bar{X}) ← X_{+4} = t ∧ X_{+5} = g ∧ X_{+6} = a$ |
-
----
-
-## Jump to the code!
-
-TBD!!!
-
-{{% /section %}}
-
----
-
-{{% section %}}
-
 ## Knowledge injection via Lambda Layer (KILL)
 (ref. [Magnini et al., 2022](https://ceur-ws.org/Vol-3261/paper5.pdf))
 
@@ -1210,8 +1156,8 @@ $$
 
 {{% section %}}
 
-## Practical example with KILL
-The poker hand data set (PHDS)
+## Practical example of SKI
+The poker hand data set (PHDS) (cf. [Cattral Robert and Oppacher Franz, 2002](https://doi.org/10.24432/C5KW38))
 
 ---
 
@@ -1229,9 +1175,9 @@ The poker hand data set (PHDS)
 
 - Classes: 10
 
-- Training set: 25.010
+- Training set: 25,010
 
-- Test set: 1.000.000
+- Test set: 1,000,000
 
 </div>
 
@@ -1290,8 +1236,27 @@ The poker hand data set (PHDS)
 
 ---
 
+## What we will do
+
+1. Download the PHDS dataset and preprocess it
+
+2. Define the *symbolic knowledge* to inject
+
+3. Train a sub-symbolic predictor -- a *neural network* -- on the PHDS dataset
+
+4. Train a second neural network with the symbolic knowledge injected
+
+5. We will inject the knowledge in the *loss function*
+
+6. Visualise and compare the results of the two predictors
+
+---
+
 ## Jump to the code!
-TBD!!!
+
+GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
+
+{{< image src="./images/ski-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 
 {{% /section %}}
 
