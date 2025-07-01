@@ -1066,7 +1066,7 @@ SKI methods: theory and practice
 
 {{% section %}}
 
-## Knowledge injection via Network Structuring (KINS)
+## Knowledge Injection via Network Structuring (KINS)
 (ref. [Magnini et al., 2023](https://doi.org/10.1093/LOGCOM/EXAD037))
 
 ---
@@ -1107,7 +1107,7 @@ SKI methods: theory and practice
 
 {{% section %}}
 
-## Knowledge injection via Lambda Layer (KILL)
+## Knowledge Injection via Lambda Layer (KILL)
 (ref. [Magnini et al., 2022](https://ceur-ws.org/Vol-3261/paper5.pdf))
 
 ---
@@ -1256,7 +1256,7 @@ The poker hand data set (PHDS) (cf. [Cattral Robert and Oppacher Franz, 2002](ht
 
 ## Jump to the code!
 
-GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
+GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](http:github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
 
 {{< image src="./images/ski-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 
