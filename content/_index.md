@@ -64,6 +64,65 @@ Two broad categories of AI approaches:
 
 {{< image src="./images/ai-map2.svg" alt="AI map with a focus on symbolic vs sub-symbolic" width="100%" >}}
 
+
+---
+
+{{% section %}}
+
+## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 1)
+
+### Local vs. Distributed Representations
+
+{{% multicol %}}
+{{% col %}}
+{{< image src="./images/local-distributed-representations.png" alt="Local vs. Distributed Representations of a bunch of animals" width="100%" max-h="60vh" >}}
+{{% /col %}}
+{{% col %}}
+<br>
+
+- __Local__ $\approx$ "symbolic": each symbol has a clear, distinct meaning
+    + e.g. `"bear"` is a symbol denoting a crisp category (either the animal is a bear or not)
+
+- __Distributed__ $\approx$ "non-symbolic": symbols do not have a clear meaning per se, but the whole representation does
+    + e.g. `"swim"` is fuzzy capability: one animal may be (un)able to swim to some extent
+
+<br>
+
+{{% fragment %}}
+> Let's say we need to represent $N$ classes, how many columns would the tables have?
+{{% /fragment %}}
+
+{{% /col %}}
+{{% /multicol %}}
+
+---
+
+## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 2)
+
+### What is a "symbol" after all? Aren't numbers symbols too?
+
+According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_6):
+
+> __Symbolic__ representations of knowledge
+> - involve a _set of symbols_
+> - which can be _combined_ (e.g., concatenated) in (possibly) infinitely many ways,
+> - following precise _syntactical rules_,
+> - where both elementary symbols and any admissible combination of them can be _assigned with meaning_
+
+---
+
+## Why "*Sub*-symbolic" instead of "Non-symbolic" or just "Numerical"?
+
+- There exist approaches where symbols are combined with numbers, e.g.:
+    + **Probabilistic logic programming**: where logic statements are combined with probabilities
+    + **Fuzzy logic**: where logic statements are combined with degrees of truth
+    + **Bayesian networks**: a.k.a. graphical models, where nodes are symbols and edges are conditional dependencies with probabilities, e.g.
+        ![Example of a Bayesian network](./images/bn.png)
+
+- These approaches are _not purely symbolic_, but they are _not purely numeric_ either, so we call the overall category __"sub-symbolic"__
+
+{{% /section %}}
+
 ---
 
 {{% section %}}
@@ -225,63 +284,6 @@ Focus on the target feature:
 
 ---
 
-{{% section %}}
-
-## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 1)
-
-### Local vs. Distributed Representations
-
-{{% multicol %}}
-{{% col %}}
-{{< image src="./images/local-distributed-representations.png" alt="Local vs. Distributed Representations of a bunch of animals" width="100%" max-h="60vh" >}}
-{{% /col %}}
-{{% col %}}
-<br>
-
-- __Local__ $\approx$ "symbolic": each symbol has a clear, distinct meaning
-    + e.g. `"bear"` is a symbol denoting a crisp category (either the animal is a bear or not)
-
-- __Distributed__ $\approx$ "non-symbolic": symbols do not have a clear meaning per se, but the whole representation does
-    + e.g. `"swim"` is fuzzy capability: one animal may be (un)able to swim to some extent
-
-<br>
-
-{{% fragment %}}
-> Let's say we need to represent $N$ classes, how many columns would the tables have?
-{{% /fragment %}}
-
-{{% /col %}}
-{{% /multicol %}}
-
----
-
-## Why the wording "Symbolic" vs. "Sub-symbolic"? (pt. 2)
-
-### What is a "symbol" after all? Aren't numbers symbols too?
-
-According to [Tim van Gelder in 1990](https://doi.org/10.1007/978-3-642-76070-9_6):
-
-> __Symbolic__ representations of knowledge
-> - involve a _set of symbols_
-> - which can be _combined_ (e.g., concatenated) in (possibly) infinitely many ways,
-> - following precise _syntactical rules_,
-> - where both elementary symbols and any admissible combination of them can be _assigned with meaning_
-
----
-
-## Why "*Sub*-symbolic" instead of "Non-symbolic" or just "Numerical"?
-
-- There exist approaches where symbols are combined with numbers, e.g.:
-    + **Probabilistic logic programming**: where logic statements are combined with probabilities
-    + **Fuzzy logic**: where logic statements are combined with degrees of truth
-    + **Bayesian networks**: a.k.a. graphical models, where nodes are symbols and edges are conditional dependencies with probabilities, e.g.
-        ![Example of a Bayesian network](./images/bn.png)
-
-- These approaches are _not purely symbolic_, but they are _not purely numeric_ either, so we call the overall category __"sub-symbolic"__
-
-{{% /section %}}
-
----
 
 ## Long-standing dualism
 
