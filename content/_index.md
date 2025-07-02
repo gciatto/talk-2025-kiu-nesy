@@ -1256,7 +1256,7 @@ The poker hand data set (PHDS) (cf. [Cattral Robert and Oppacher Franz, 2002](ht
 
 ## Jump to the code!
 
-GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](http:github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
+GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](https://github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
 
 {{< image src="./images/ski-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 
