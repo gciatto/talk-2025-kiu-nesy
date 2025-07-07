@@ -1081,22 +1081,20 @@ Expressiveness
 </ul>
 </li>
 <li>
-<p><strong>Enhance interpretability</strong>: with SKI we can make predictors that are</p>
+<p><strong>Enhance trustworthiness</strong>: SKI let us train predictors that are</p>
 <ul>
-<li>interpretable by <em>transparent box design</em>, as they are built to mimic symbolic knowledge</li>
-<li>interpretable using <em>symbols as constraints</em>, as they are built to respect symbolic knowledge</li>
+<li><em>transparent by design</em>, as they are built to mimic symbolic knowledge…</li>
+<li>… i.e. they use <em>symbols as constraints</em>, as they are built to respect symbolic knowledge</li>
 </ul>
 </li>
 <li>
-<p><strong>Robustness to data degradation</strong>: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of noisy or scarcity of data</p>
+<p><strong>Robustness to data degradation</strong>: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of <em>noisy data</em> or <em>data scarcity</em></p>
 </li>
 <li>
-<p><strong>Enhance fairness</strong>: by incorporating symbolic knowledge about fairness constraints, we can ensure that sub-symbolic models make decisions that align with ethical considerations</p>
-</li>
-<li>
-<p><strong>And more</strong>: SKI can simplify the predictor’s architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting</p>
+<p><strong>Enhance fairness</strong>: by incorporating symbolic knowledge about <em>fairness constraints</em>, we can push sub-symbolic models towards making decisions that align with <em>ethical requirements</em></p>
 </li>
 </ul>
+<!-- - **And more**: SKI can simplify the predictor's architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting -->
 </section><section>
 <h2 id="concepts">Concepts</h2>
 <p>Main entities and how to inject symbolic knowledge into sub-symbolic predictors</p>
@@ -1104,20 +1102,16 @@ Expressiveness
 <h2 id="entities">Entities</h2>
 <ul>
 <li>
-<p><strong>Predictor</strong>: a sub-symbolic model that makes predictions based on input data, usually a neural network</p>
+<p><strong>Predictor</strong>: a sub-symbolic model that makes predictions based on input data, usually a <em>neural network</em></p>
 </li>
 <li>
-<p><strong>Symbolic knowledge</strong>: structured, formal knowledge that can be represented in a symbolic form. The most common forms of symbolic knowledge are</p>
-<ul>
-<li><em>Propositional logic</em>, simple rules with if-then structure</li>
-<li><em>Datalog</em>, a subset of first-order logic with no function symbols, only constants and variables</li>
-</ul>
+<p><strong>Symbolic knowledge</strong>: structured, formal knowledge that <em>predictors should comply</em> with</p>
 </li>
 <li>
-<p><strong>Fuzzification</strong>: the process of converting symbolic knowledge into a form that can be used by sub-symbolic predictors, e.g. by assigning degrees of truth to symbolic statements</p>
+<p><strong>Fuzzification</strong>: the process of <em>converting</em> symbolic knowledge into a <em>real functions</em></p>
 </li>
 <li>
-<p><strong>Injector</strong>: the main component that injects symbolic knowledge into the predictor, by modifying its architecture, its training process or by other means</p>
+<p><strong>Injector</strong>: the algorithm actually performing SKI, by modifying neural architectures, training processes, etc.</p>
 </li>
 </ul>
 </section><section>
@@ -1204,14 +1198,15 @@ Expressiveness
 </table>
 <blockquote>
 <p>$^{*}$ encodes the value for the $i^{\text{th}}$ output
+<br>
 $^{**}$ assuming $p$ is defined by $k$ clauses of the form:
 ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></blockquote>
 </section><section>
 <h2 id="injector-pt1">Injector (pt.1)</h2>
-<img src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+<img src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" style="width: 80%; max-width: 95vw; max-height: 70vh; object-fit: contain; ">
 </section><section>
 <h2 id="injector-pt-2">Injector (pt. 2)</h2>
-<img src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+<img src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" style="width: 80%; max-width: 95vw; max-height: 70vh; object-fit: contain; ">
 
 </section>
 </section><section>
@@ -1234,56 +1229,56 @@ ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></
   </thead>
   <tbody>
       <tr>
-          <td>[[\neg \phi]]</td>
+          <td>$[[\neg \phi]]$</td>
           <td>$\eta(1 - [[\phi]])$</td>
           <td></td>
           <td>[[\phi \le \psi]]</td>
           <td>$\eta([[\phi]] - [[\psi]])$</td>
       </tr>
       <tr>
-          <td>[[\phi \wedge \psi]]</td>
+          <td>$[[\phi \wedge \psi]]$</td>
           <td>$\eta(\max([[\phi]], [[\psi]]))$</td>
           <td></td>
           <td>$[\mathrm{class}(\bar{X}, {y}_i) \leftarrow \psi]]$</td>
           <td>$[[\psi]]^{*}$</td>
       </tr>
       <tr>
-          <td>[[\phi \vee \psi]]</td>
+          <td>$[[\phi \vee \psi]]$</td>
           <td>$\eta(\min([[\phi]], [[\psi]]))$</td>
           <td></td>
           <td>$[\text{expr}(\bar{X})]]$</td>
           <td>$\text{expr}([[\bar{X}]])$</td>
       </tr>
       <tr>
-          <td>[[\phi = \psi]]</td>
+          <td>$[[\phi = \psi]]$</td>
           <td>$\eta(\left\lvert [[\phi]] - [[\psi]] \right\rvert)$</td>
           <td></td>
           <td>$[[\mathtt{true}]]$</td>
           <td>$0$</td>
       </tr>
       <tr>
-          <td>[[\phi \ne \psi]]</td>
+          <td>$[[\phi \ne \psi]]$</td>
           <td>$[[\neg(\phi = \psi)]]$</td>
           <td></td>
           <td>$[[\mathtt{false}]]$</td>
           <td>$1$</td>
       </tr>
       <tr>
-          <td>[[\phi &gt; \psi]]</td>
+          <td>$[[\phi &gt; \psi]]$</td>
           <td>$\eta(\frac{1}{2} - [[\phi]] + [[\psi]])$</td>
           <td></td>
           <td>$[[X]]$</td>
           <td>$x$</td>
       </tr>
       <tr>
-          <td>[[\phi \ge \psi]]</td>
+          <td>$[[\phi \ge \psi]]$</td>
           <td>$\eta([[\psi]] - [[\phi]])$</td>
           <td></td>
           <td>$[[{k}]]$</td>
           <td>$k$</td>
       </tr>
       <tr>
-          <td>[[\phi &lt; \psi]]</td>
+          <td>$[[\phi &lt; \psi]]$</td>
           <td>$\eta(\frac{1}{2} + [[\phi]] - [[\psi]])$</td>
           <td></td>
           <td>$[\mathrm{p}(\bar{X})]]^{**}$</td>
@@ -1293,6 +1288,7 @@ ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></
 </table>
 <blockquote>
 <p>$^{*}$ encodes the penalty for the $i^{\text{th}}$ neuron
+<br>
 $^{**}$ assuming predicate $p$ is defined by $k$ clauses of the form:
 ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></blockquote>
 </section><section>
@@ -1311,7 +1307,7 @@ $$
 </div>
 </section><section>
 <h2 id="injector-pt-2">Injector (pt. 2)</h2>
-<img src="./images/lambda-layer.svg" alt="Example of a neural network architecture with a lambda layer" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+<img src="./images/lambda-layer.svg" alt="Example of a neural network architecture with a lambda layer" style="width: 80%; max-width: 95vw; max-height: 70vh; object-fit: contain; ">
 
 </section>
 </section><section>
