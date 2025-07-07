@@ -1,0 +1,1894 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta name="generator" content="Hugo 0.147.8">
+    <meta charset="utf-8">
+<title>SKE &amp; SKI: Theory and Methods</title>
+<meta name="description" content="Symbolic Knowledge Extraction and Injection: Theory and Methods">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/talk-2025-kiu-nesy/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/talk-2025-kiu-nesy/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/talk-2025-kiu-nesy/css/custom-theme.min.ed5bfd9e406c86e5ecba1c75d54dcd092e7ef3029e200b559a53bcd987fb2844.css" id="theme"><link rel="stylesheet" href="/talk-2025-kiu-nesy/highlight-js/solarized-dark.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/gh/DanySK/css-blur-animation/blur.css" rel="stylesheet" crossorigin="anonymous">
+
+<script src="https://kit.fontawesome.com/81ac037be0.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+<section data-shortcode-section="">
+<h1 id="symbolic-knowledge-extraction-and-injectiontheory-and-methods">Symbolic Knowledge Extraction and Injection:<br>Theory and Methods</h1>
+<p><span class="hint">(last built on: 2025-07-07)</span></p>
+<p><a href="mailto:giovanni.ciatto@unibo.it">Giovanni Ciatto</a> and <a href="mailto:matteo.magnini@unibo.it">Matteo Magnini</a>
+<br>Dipartimento di Informatica — Scienza e Ingegneria (DISI), Sede di Cesena,
+<br> Alma Mater Studiorum—Università di Bologna</p>
+<p><br><a href="https://europroofnet.github.io/Kutaisi25/">School on Symbolic and Statistical Methods for Reasoning and Processing Formal Expressions</a>
+<br>July 8–9, 2025, Trento, Italy</p>
+<img src="https://europroofnet.github.io/assets/images/epn-logo.svg" alt="EPN Logo" style="height: 10vh; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+<img src="https://europroofnet.github.io/assets/images/COST_LOGO_rgb_highresolution.jpg" alt="COST Logo" style="height: 10vh; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+<img src="https://www.cost.eu/uploads/2021/10/EN-Funded-by-the-EU-PANTONE-1024x215.jpg" alt="EU Logo" style="height: 10vh; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="link-to-these-slides">Link to these slides</h2>
+<p><a href="https://gciatto.github.io/talk-2025-kiu-nesy/">https://gciatto.github.io/talk-2025-kiu-nesy/</a></p>
+<div id="ZDYwMDZhNTVmYWY3ZDFkZWJkNGZlNWU4YjE4YjVjMjgwZjE3MjkwZmNhOTgxYWM4ODU4YTYwMGRmZDZmZTdmYw==" style=""></div>
+<script type="text/javascript">
+    const qrCode = new QRCodeStyling({
+        width:  300 ,
+        height:  300 ,
+        type: "svg",
+        data: "https://gciatto.github.io/talk-2025-kiu-nesy/",
+        image: "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg",
+        dotsOptions: {
+            color: "#000000",
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: "#ffffff",
+        },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin:  10 
+        }
+    });
+    qrCode.append(document.getElementById("ZDYwMDZhNTVmYWY3ZDFkZWJkNGZlNWU4YjE4YjVjMjgwZjE3MjkwZmNhOTgxYWM4ODU4YTYwMGRmZDZmZTdmYw=="));
+</script>
+<p><a href="?print-pdf&amp;pdfSeparateFragments=false"><i class="fa fa-print" aria-hidden="true"></i> printable version</a></p>
+
+</section>
+</section>
+
+<section data-noprocess="" data-shortcode-slide="" id="background">
+  
+<h1 id="background">Background</h1>
+<p>Quick overview on symbolic vs. sub-symbolic AI</p>
+</section><section>
+<h2 id="overview-on-ai">Overview on AI</h2>
+
+
+
+
+
+
+<img src="./images/ai-map.svg" alt="AI map" style="width: 100%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+<ul>
+<li>wide field of research, with many <em>sub-fields</em></li>
+<li>each sub-field has its own relevant <em>tasks</em> (problems) …</li>
+<li>… and each task comes with many useful <em>methods</em> (algorithms)</li>
+</ul>
+</section><section>
+<h2 id="symbolic-vs-sub-symbolic-ai">Symbolic vs. Sub-symbolic AI</h2>
+<p>Two broad categories of AI approaches:</p>
+
+
+
+
+
+
+<img src="./images/ai-map2.svg" alt="AI map with a focus on symbolic vs sub-symbolic" style="width: 100%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="why-the-wording-symbolic-vs-sub-symbolic-pt-1">Why the wording “Symbolic” vs. “Sub-symbolic”? (pt. 1)</h2>
+<h3 id="local-vs-distributed-representations">Local vs. Distributed Representations</h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><img src="./images/local-distributed-representations.png" alt="Local vs. Distributed Representations of a bunch of animals" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</div>
+<div class="col "><br>
+<ul>
+<li>
+<p><strong>Local</strong> $\approx$ “symbolic”: each symbol has a clear, distinct meaning</p>
+<ul>
+<li>e.g. <code>"bear"</code> is a symbol denoting a crisp category (either the animal is a bear or not)</li>
+</ul>
+</li>
+<li>
+<p><strong>Distributed</strong> $\approx$ “non-symbolic”: symbols do not have a clear meaning per se, but the whole representation does</p>
+<ul>
+<li>e.g. <code>"swim"</code> is fuzzy capability: one animal may be (un)able to swim to some extent</li>
+</ul>
+</li>
+</ul>
+<br>
+<span class="fragment ">
+  <blockquote>
+<p>Let’s say we need to represent $N$ classes, how many columns would the tables have?</p></blockquote>
+</span>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="why-the-wording-symbolic-vs-sub-symbolic-pt-2">Why the wording “Symbolic” vs. “Sub-symbolic”? (pt. 2)</h2>
+<h3 id="what-is-a-symbol-after-all-arent-numbers-symbols-too">What is a “symbol” after all? Aren’t numbers symbols too?</h3>
+<p>According to <a href="https://doi.org/10.1007/978-3-642-76070-9_6">Tim van Gelder in 1990</a>:</p>
+<blockquote>
+<p><strong>Symbolic</strong> representations of knowledge</p>
+<ul>
+<li>involve a <em>set of symbols</em></li>
+<li>which can be <em>combined</em> (e.g., concatenated) in (possibly) infinitely many ways,</li>
+<li>following precise <em>syntactical rules</em>,</li>
+<li>where both elementary symbols and any admissible combination of them can be <em>assigned with meaning</em></li>
+</ul></blockquote>
+</section><section>
+<h2 id="why-sub-symbolic-instead-of-non-symbolic-or-just-numerical">Why “<em>Sub</em>-symbolic” instead of “Non-symbolic” or just “Numerical”?</h2>
+<ul>
+<li>
+<p>There exist approaches where symbols are combined with numbers, e.g.:</p>
+<ul>
+<li><strong>Probabilistic logic programming</strong>: where logic statements are combined with probabilities</li>
+<li><strong>Fuzzy logic</strong>: where logic statements are combined with degrees of truth</li>
+<li><strong>Bayesian networks</strong>: a.k.a. graphical models, where nodes are symbols and edges are conditional dependencies with probabilities, e.g.
+<img src="./images/bn.png" alt="Example of a Bayesian network"></li>
+</ul>
+</li>
+<li>
+<p>These approaches are <em>not purely symbolic</em>, but they are <em>not purely numeric</em> either, so we call the overall category <strong>“sub-symbolic”</strong></p>
+</li>
+</ul>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="examples-of-symbolic-ai-pt-1">Examples of Symbolic AI (pt. 1)</h2>
+<ul>
+<li><strong>Logic programming</strong>: SLD resolution (e.g., Prolog)</li>
+<li><strong>Knowledge representation</strong>: Semantic Web (e.g., OWL), Description Logics (e.g., ALC)</li>
+<li><strong>Automated reasoning</strong>: Theorem proving, Model checking</li>
+<li><strong>Planning</strong>: STRIPS, PDDL</li>
+</ul>
+</section><section>
+<h2 id="examples-of-symbolic-ai-pt-2">Examples of Symbolic AI (pt. 2)</h2>
+<h3 id="logic-programming-with-sld-resolution">Logic programming with SLD resolution</h3>
+<img src="./images/proof-tree.png" alt="Example of SLD resolution on a simple theory" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-symbolic-ai-pt-3">Examples of Symbolic AI (pt. 3)</h2>
+<h3 id="ontology-definition-in-owl">Ontology definition in OWL</h3>
+<img src="./images/ontology-example.png" alt="Example of ontology definition in OWL" style="width: 80%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-symbolic-ai-pt-4">Examples of Symbolic AI (pt. 4)</h2>
+<h3 id="model-checking-as-opposed-to-testing">Model-checking (as opposed to testing)</h3>
+<img src="./images/model-checking-vs-testing.webp" alt="Main differences among model-checking and testing for verifying computational systems" style="width: 80%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-symbolic-ai-pt-5">Examples of Symbolic AI (pt. 5)</h2>
+<h3 id="planning-in-strips">Planning in STRIPS</h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><img src="./images/planning.png" alt="Example of start vs goal state + state branching" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</div>
+<div class="col "><br>
+<h4 id="available-actions">Available actions</h4>
+<ul>
+<li><code>grab(X)</code>: grabs block <code>X</code> from the table</li>
+<li><code>put(X)</code>: puts block <code>X</code> on the table</li>
+<li><code>stack(X, Y)</code>: stacks block <code>X</code> on top of block <code>Y</code></li>
+<li><code>unstack(X, Y)</code>: un-stacks block <code>X</code> from block <code>Y</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+</section><section>
+<h2 id="what-do-these-symbolic-approaches-have-in-common">What do these <em>symbolic</em> approaches have in common?</h2>
+<ul>
+<li>
+<p><strong>Structured representations</strong>: knowledge (I/O data) is represented in a structured, formal way (e.g., logic formulas, ontologies)</p>
+</li>
+<li>
+<p><strong>Algorithmic manipulation of representations</strong>: each approach relies on algorithms that manipulate these structured representations following exact rules</p>
+</li>
+<li>
+<p><strong>Crisp semantics</strong>: the meaning of the representations is well-defined, and the algorithms produce exact results</p>
+<ul>
+<li>representations are either <em>well-formed or not</em>, algorithms rely on rules which are either <em>applicable or not</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Model-driven</strong>: algorithms may commonly work in zero- or few-shot settings, humans must commonly model and encode knowledge in the target structure</p>
+</li>
+<li>
+<p><strong>Clear computational complexity</strong>: the decidability, complexity, and tractability of the algorithms are well understood</p>
+</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="examples-of-sub-symbolic-ai-pt-1">Examples of Sub-symbolic AI (pt. 1)</h2>
+<ul>
+<li>
+<p><strong>Machine learning</strong>: supervised, unsupervised, and reinforcement learning</p>
+<ul>
+<li><em>Supervised</em> learning: fitting a discrete (classification) or a continuous function (regression) from examples</li>
+<li><em>Unsupervised</em> learning: clustering, dimensionality reduction</li>
+<li><em>Reinforcement</em> learning: learning a policy to maximize a reward signal, via simulation</li>
+</ul>
+</li>
+<li>
+<p><strong>Probabilistic reasoning</strong>: Bayesian networks, Markov models, probabilistic logic programming</p>
+</li>
+</ul>
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-2">Examples of Sub-symbolic AI (pt. 2)</h2>
+<h3 id="supervised-learning">Supervised learning</h3>
+<img src="./images/supervised.png" alt="Overview on the supervised learning process" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-3">Examples of Sub-symbolic AI (pt. 3)</h2>
+<h3 id="supervised-learning--classification-vs-regression-12">Supervised learning – Classification vs. Regression (1/2)</h3>
+<p>Data separation vs. curve fitting:</p>
+<img src="./images/classification-vs-regression1.png" alt="Classification vs. Regression: separation vs. curve fitting" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-4">Examples of Sub-symbolic AI (pt. 4)</h2>
+<h3 id="supervised-learning--classification-vs-regression-22">Supervised learning – Classification vs. Regression (2/2)</h3>
+<p>Focus on the target feature:</p>
+<img src="./images/classification-vs-regression2.png" alt="Classification vs. Regression: finite vs. continuous target feature" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-5">Examples of Sub-symbolic AI (pt. 5)</h2>
+<h3 id="unsupervised-learning--clustering">Unsupervised learning – Clustering</h3>
+<img src="./images/clustering.png" alt="Example of the clustering task" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-6">Examples of Sub-symbolic AI (pt. 6)</h2>
+<h3 id="unsupervised-learning--reinforcement-learning-metaphor">Unsupervised learning – Reinforcement learning (metaphor)</h3>
+<img src="./images/reinforcement.svg" alt="Main idea behind reinforcement learning" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="examples-of-sub-symbolic-ai-pt-7">Examples of Sub-symbolic AI (pt. 7)</h2>
+<h3 id="reinforcement-learning--reinforcement-learning-policy">Reinforcement learning – Reinforcement learning (policy)</h3>
+<img src="./images/q-table.png" alt="The goal of reinforcement learning is to estimate a policy, i.e. a function (e.g. a table) estimating the expected reward per each state–action pair" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+
+</section>
+</section><section>
+<h2 id="what-do-these-sub-symbolic-approaches-have-in-common">What do these <em>sub-symbolic</em> approaches have in common?</h2>
+<ul>
+<li>
+<p><strong>Numeric representations</strong>: knowledge (I/O data) is represented in a less structured way, often as vectors/matrices/tensors of numbers</p>
+</li>
+<li>
+<p><strong>Differentiable manipulation of representations</strong>: algorithms rely on mathematical operations involving these numeric representations, most-commonly undergoing some optimization process</p>
+<ul>
+<li>e.g., sum, product, max, min, etc.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fuzzy/continuous semantics</strong>: representations are from continuous spaces, where similarities and distances are defined in a continuous way, and algorithms may yield fuzzy results</p>
+</li>
+<li>
+<p><strong>Data-driven</strong> + <strong>Usage vs. training</strong>: algorithms are often trained on data, to be later re-used on other data</p>
+<ul>
+<li>usage is commonly impractical or impossible without training</li>
+</ul>
+</li>
+<li>
+<p><strong>Unclear computational complexity</strong>: strong reliance on greedy or time-limited optimization methods, lack of theoretical guarantees on the quality of the results</p>
+</li>
+</ul>
+</section><section>
+<h2 id="long-standing-dualism">Long-standing dualism</h2>
+<h3 id="intuition-vs-reasoning">Intuition vs. Reasoning</h3>
+<ol>
+<li>Esprit de <em>finesse</em> vs. Esprit de <em>géométrie</em> (Philosophy) — <a href="https://en.wikipedia.org/wiki/Pens%C3%A9es">Blaise Pascal, 1669</a></li>
+<li><em>Cognitive</em> vs. <em>Behavioural</em> Psychology — <a href="https://doi.org/10.1111/j.2044-8295.1985.tb01953.x">B.F. Skinner, 1950s</a></li>
+<li><em>System 1</em> (fast, intuitive) vs. <em>System 2</em> (slow, rational) — <a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow">Daniel Kahneman, 2011</a></li>
+</ol>
+<h2></h2>
+
+
+<span class="fragment ">
+  <div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h4 id="sub-symbolic-ai">Sub-symbolic AI</h4>
+<ul>
+<li>Provides mechanisms emulating human-like <em>intuition</em></li>
+<li><em>Quick</em>, possibly <em>error-prone</em>, but often <em>effective</em></li>
+<li>Requires <em>learning</em> from data</li>
+<li>Often <em>opaque</em>, hard to interpret or explain</li>
+</ul>
+</div>
+<div class="col "><h4 id="symbolic-ai">Symbolic AI</h4>
+<ul>
+<li>Provides mechanisms emulating human-like <em>reasoning</em></li>
+<li><em>Slow</em>, but <em>precise</em> and <em>verifiable</em></li>
+<li>Requires symbolic <em>modeling</em> and <em>encoding</em> knowledge</li>
+<li>Often <em>transparent</em>, easier to interpret and explain</li>
+</ul>
+</div>
+</div>
+</div>
+
+</span>
+
+</section><section>
+<h2 id="need-for-integration">Need for integration</h2>
+<ul>
+<li>the <a href="https://www.nesy-ai.org/">NeSy community</a> has long recognized the <em>complementarity</em> among symbolic and sub-symbolic approaches…</li>
+<li>… with a focus on <strong>neural-networks</strong> (<em>NN</em>) based sub-symbolic methods, as they are very <em>flexible</em></li>
+</ul>
+
+
+<span class="fragment ">
+  <h3 id="patterns-of-integration-or-combination-cf-bhuyan-et-al-2024">Patterns of <em>integration</em> or <em>combination</em> (cf. <a href="https://link.springer.com/article/10.1007/s00521-024-09960-z">Bhuyan et al., 2024</a>)</h3>
+<ol>
+<li><code>Symbolic Neuro-Symbolic</code>: symbols $\rightarrow$ vectors $\rightarrow$ NNs $\rightarrow$ vectors $\rightarrow$ symbols</li>
+<li><code>Symbolic[Neuro]</code>: symbolic module $\xrightarrow{invokes}$ NN $\rightarrow $ output</li>
+<li><code>Neuro | Symbolic</code>: NN $\xrightarrow{cooperates}$ symbolic module $\xrightarrow{cooperates}$ NN $\rightarrow$ …</li>
+<li><code>Neuro-Symbolic → Neuro</code>: symbolic knowledge $\xrightarrow{influences}$ NN</li>
+<li><code>Neuro<sub>Symbolic</sub></code>: symbolic knowledge $\xrightarrow{constrains}$ NN</li>
+<li><code>Neuro[Symbolic]</code>: symbolic module $\xrightarrow{embedded in}$ NN</li>
+</ol>
+
+</span>
+
+</section><section>
+<h2 id="focus-on-two-main-approaches">Focus on two main approaches</h2>
+<p>(cf. <a href="https://doi.org/10.1145/3645103">Ciatto et al., 2024</a>)</p>
+<ul>
+<li>
+<p>Symbolic Knowledge <strong>Extraction</strong> (<em>SKE</em>): extracting symbolic knowledge from sub-symbolic models</p>
+<ul>
+<li>for the sake of <em>explainability</em> and <em>interpretability</em> in machine learning</li>
+</ul>
+</li>
+<li>
+<p>Symbolic Knowledge <strong>Injection</strong> (<em>SKI</em>): injecting symbolic knowledge into sub-symbolic models</p>
+<ul>
+<li>for the sake of <em>trustworthiness</em> and <em>robustness</em> in machine learning</li>
+</ul>
+</li>
+</ul>
+
+
+<span class="fragment ">
+  <p>Both require some basic understanding of how <em>supervised</em> <strong>machine learning</strong> works</p>
+
+</span>
+
+</section>
+
+<section data-noprocess="" data-shortcode-slide="" id="ml">
+  
+
+
+<section data-shortcode-section="">
+<h1 id="supervised-machine-learning-101">Supervised Machine Learning 101</h1>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-1">Supervised Machine Learning 101 (pt. 1)</h2>
+<ol>
+<li>Let’s say you have a <strong>dataset</strong> of vectors in $\mathbb{R}^n$</li>
+</ol>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><ol start="2">
+<li>Let’s say the vectors are <em>labelled differently</em> (2 colors)</li>
+</ol>
+<img src="./images/classification-1.png" alt="Example of vectors to be separated" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<ol start="3">
+<li>Let’s say you want to <strong>separate</strong> them</li>
+</ol>
+</div>
+<div class="col "><ol start="2">
+<li>Let’s say the vectors are <em>aligned</em> (along a curve)</li>
+</ol>
+<img src="./images/regression-1.png" alt="Example of vectors to be interpolated" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<ol start="3">
+<li>Let’s say you want to <strong>interpolate</strong> them</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-2">Supervised Machine Learning 101 (pt. 2)</h2>
+<ol start="4">
+<li>Then, need to <em>approximate</em> the function <em>$f$</em>…</li>
+</ol>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><ol start="4">
+<li>… <strong>separating them</strong> (the sigmoid here)</li>
+</ol>
+<img src="./images/classification-2.png" alt="Example of vectors to be separated, and the corresponding decision boundary" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<ol start="5">
+<li>The function $f$ is the <strong>decision boundary</strong> (a.k.a. <em>classifier</em>)</li>
+</ol>
+</div>
+<div class="col "><ol start="4">
+<li>…<strong>interpolating them</strong> (the parabola here)</li>
+</ol>
+<img src="./images/regression-2.png" alt="Example of vectors to be interpolated, and the corresponding curve" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<ol start="5">
+<li>The function $f$ is the <strong>regression curve</strong> (a.k.a. <em>regressor</em>)</li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="6">
+<li><span style="color: red;">How to compute such a function $f$?</span></li>
+</ol>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-3">Supervised Machine Learning 101 (pt. 3)</h2>
+<h3 id="lets-formalize-the-problem-12">Let’s formalize the problem (1/2)</h3>
+<br>
+<ol>
+<li>Let’s assume the data represented as a set of vectors in a <strong>dataset</strong> $D \subset \mathbb{R}^n$ s.t. $|D| = m$
+<ul>
+<li>e.g. $D = {(x_1, y_1, c_1), (x_2, y_2, c_2), \ldots, (x_m, y_m, c_m)}$ for the classification dataset</li>
+<li>e.g. $D = {(x_1, y_1), (x_2, y_2), \ldots, (x_m, y_m)}$ for the regression dataset</li>
+</ul>
+</li>
+<li>Let $\mathcal{X}$ (resp. $\mathcal{Y}$) be the <em>input</em> (resp. output or <em>target</em>) <em>space</em> of the data at hand
+<ul>
+<li>so $\exists X \in \mathcal{X}$ and $\exists Y \in \mathcal{Y}$ s.t. $(X, Y) \equiv D$</li>
+<li>i.e. $X$ is the <em>input data</em> and $Y$ is the <em>target data</em> in $D$</li>
+</ul>
+</li>
+</ol>
+<img src="./images/target.png" alt="Modelling of the dataset" style="width: 50%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-4">Supervised Machine Learning 101 (pt. 4)</h2>
+<h3 id="lets-formalize-the-problem-22">Let’s formalize the problem (2/2)</h3>
+<br>
+<ol start="3">
+<li>Let $\mathcal{H} = \lbrace f \mid f: \mathcal{X} \to \mathcal{Y}\rbrace$ be the set of all possible functions mapping $\mathcal{X}$ to $\mathcal{Y}$
+<ul>
+<li>i.e. the so-called <strong>hypothesis space</strong></li>
+</ul>
+</li>
+<li>We need now to find <strong>the best</strong> $f^* \in \mathcal{H}$
+<ul>
+<li>best w.r.t to what?</li>
+</ul>
+</li>
+<li>We need to define a <strong>loss function</strong> $\mathcal{L}$ that quantifies the <em>difference</em> between the <em>predicted output</em> $f(X)$ and the <em>true output</em> $Y$
+<ul>
+<li>for any possible $f \in \mathcal{H}$</li>
+</ul>
+</li>
+<li>So, our <strong>learning problem</strong> is as simple as a <strong>search problem</strong> in the hypothesis space:
+$$ f^* = \arg\min_{f \in \mathcal{H}} \mathcal{L}(f(X), Y) $$</li>
+<li>Ok, but in <em>practice</em>, how do we do that?</li>
+</ol>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-5">Supervised Machine Learning 101 (pt. 5)</h2>
+<h3 id="lets-solve-the-problem">Let’s solve the problem</h3>
+<br>
+<ol>
+<li>How to <em>explore</em> the <em>hypothesis space</em>, depends on what <em>sorts of functions</em> it contains</li>
+<li>There exist several sorts functions for which an <strong>exploration algorithm</strong> is known
+<ul>
+<li>e.g. $\mathcal{H}$ $\equiv$ polynomials of degree $1$ (i.e. <em>lines</em>: $f(\bar{x}) = \beta + \bar{\omega} \cdot \bar{x} = \beta + \omega_1 x_1 + \ldots + \omega_n x_n$)</li>
+<li>e.g. $\mathcal{H}$ $\equiv$ polynomials of degree $2$ (i.e. <em>parabolas</em>: $f(\bar{x}) = \beta + \omega_1 x_1 + \ldots + \omega_n x_n + \omega_1^2 x_1^2 + \ldots + \omega_n^2 x_n^2$)</li>
+<li>e.g. $\mathcal{H}$ $\equiv$ decision trees (i.e. <em>if-then-else</em> rules: $f(\bar{x}) = \text{if } x_1 \leq c_1 \text{ then } y_1 \text{ else if } x_2 \leq c_2 \text{ then } y_2 \ldots$)</li>
+<li>e.g. $\mathcal{H}$ $\equiv$ $k$-nearest neighbors ($f(\bar{x}) = \text{class of (most of) the } k \text{ nearest neighbors of } \bar{x}$)</li>
+<li>e.g. $\mathcal{H}$ $\equiv$ neural networks (i.e. <em>NNs</em>: $f(\bar{x}) = \sigma(\beta + \bar{\omega} \cdot \bar{x})$ where $\sigma$ is a non-linear activation function, e.g. sigmoid, ReLU, etc.)</li>
+</ul>
+</li>
+</ol>
+<span class="fragment ">
+  <blockquote>
+<p><strong>Remark</strong>: because of the <a href="https://en.wikipedia.org/wiki/No_free_lunch_theorem">“no free lunch” theorem</a>, <em>no</em> single algorithm is the best in <em>the general case</em></p>
+<ul>
+<li>i.e., each learning problem may be better addressed by a different learning algorithm</li>
+</ul></blockquote>
+</span>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-6">Supervised Machine Learning 101 (pt. 6)</h2>
+<h3 id="lets-solve-the-problem-with-neural-networks">Let’s solve the problem with <strong>neural networks</strong></h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><img src="./images/neuron.png" alt="Functioning of a single neuron" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p>Single neuron</p>
+</div>
+<div class="col "><img src="./images/neural-network.png" alt="Functioning of a feed-forward neural network" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p>(Feed-forward)
+<br>
+Neural network $\equiv$ cascade of <em>layers</em></p>
+</div>
+<div class="col "><img src="./images/nn-zoo.png" alt="Many sorts of neural architectures" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p><a href="https://www.asimovinstitute.org/neural-network-zoo/">Many admissible architectures</a></p>
+</div>
+</div>
+</div>
+<span class="fragment ">
+  <blockquote>
+<p><strong>Remark</strong>: NN are <a href="https://en.wikipedia.org/wiki/Universal_approximation_theorem">universal approximators</a>, provided that they have enough neurons</p></blockquote>
+</span>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-7">Supervised Machine Learning 101 (pt. 7)</h2>
+<h3 id="lets-solve-the-problem-with-gradient-descent">Let’s solve the problem with <strong>gradient descent</strong></h3>
+<ul>
+<li>
+<p>NNs (and other ML algorithms) explore the hypothesis space by using a <em>gradient descent</em> algorithm</p>
+</li>
+<li>
+<p>In this case:</p>
+<ul>
+<li>the hypothesis space <em>$\mathcal{H}$ $\equiv$ “the set of all possible NNs with a given architecture”</em>
+<ul>
+<li>e.g. 4 input neurons, 2 hidden layers with 3 neurons each, and 1 output neuron, all layers fully connected, using ReLU activation functions</li>
+</ul>
+</li>
+<li>the loss function <em>$\mathcal{L}$ $\equiv$ “the difference between the predicted output and the true output”</em>
+<ul>
+<li>e.g. $\mathcal{L}(f(X), Y) = \frac{1}{n} \sum_{i=1}^{n} (f(x_i) - y_i)^2$ <strong>(mean-squared error)</strong> for regression</li>
+<li>e.g. $\mathcal{L}(f(X), Y) = -\sum_{i=1}^{n} y_i \log(f(x_i)) + (1 - y_i) \log(1 - f(x_i))$ <strong>(cross-entropy)</strong> for classification</li>
+</ul>
+</li>
+<li>the algorithm <em>initializes the weights</em> of the NN <strong>randomly</strong>, and then iteratively updates them by minimising the <strong>gradient of the loss function</strong> w.r.t. the <em>weights</em>
+<ul>
+<li>i.e. $w_{i+1} = w_i - \eta \nabla_w \mathcal{L}(f(X), Y)$ where $\eta$ is the learning rate</li>
+</ul>
+</li>
+</ul>
+  <img src="./images/gradient-descent.jpg" alt="Gradient descent algorithm (visualization of local minima)" style="width: 45%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+  <span width="10%">
+  <img src="./images/train-loss.png" alt="Training loss over time" style="width: 45%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+<ul>
+<li>the approach is <em>greedy</em> and sensitive to <em>local minima</em>, but very <em>effective</em> in practice</li>
+</ul>
+</span></li>
+</ul>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-8">Supervised Machine Learning 101 (pt. 8)</h2>
+<h3 id="how-things-may-go-wrong--underfitting-vs-overfitting">How things may go wrong – <em>Under</em>fitting vs. <em>Over</em>fitting</h3>
+<img src="./images/bias-variance-tradeoff-class.png" alt="Bias-variance tradeoff for classification" style="width: 60%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+<img src="./images/bias-variance-tradeoff-regr.png" alt="Bias-variance tradeoff for regression" style="width: 60%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-9">Supervised Machine Learning 101 (pt. 9)</h2>
+<h3 id="how-to-address-test-set-separation">How to address: Test-Set Separation</h3>
+<img src="./images/train-test-separation.webp" alt="Train-test separation for supervised learning" style="width: 100%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-10">Supervised Machine Learning 101 (pt. 10)</h2>
+<h3 id="how-things-may-go-wrong--training-is-stochastic">How things may go wrong – Training is <strong>stochastic</strong></h3>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><p>Depending on its start, training may yield <em>different results</em>:</p>
+<img src="./images/gradient-descent.jpg" alt="Gradient descent algorithm (visualization of local minima)" style="width: 100%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+</div>
+<div class="col "><p>Solution is <strong>coss-validation</strong>:</p>
+<img src="./images/k-fold.svg" alt="K-fold cross validation" style="width: 100%; max-width: 95vw; max-height: 40vh; object-fit: contain; ">
+</div>
+</div>
+</div>
+<ol>
+<li>Train the <em>$k$ different models</em> (same architecture) on $k$ different subsets of the training set</li>
+<li><em>Average</em> the <em>results</em> of the $k$ models</li>
+<li>If average is good, the model is considered more <em>robust</em> and <em>reliable</em>
+<ul>
+<li>useful when <em>comparing</em> different <em>architectures</em> or hyper-parameters</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-11">Supervised Machine Learning 101 (pt. 11)</h2>
+<h3 id="how-things-may-go-wrong--data-may-not-be-numeric">How things may go wrong – Data may not be numeric</h3>
+<br>
+<h4 id="solution-change-encoding">Solution: <strong>change encoding</strong></h4>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><img src="./images/ordinal-encoding.png" alt="Example of ordinal encoding" style="width: 80%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p>(<em>Ordinal</em> encoding)</p>
+</div>
+<div class="col "><img src="./images/one-hot-encoding.png" alt="Example of one-hot encoding" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p>(<em>One-hot</em> encoding)</p>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="supervised-machine-learning-101-pt-12">Supervised Machine Learning 101 (pt. 12)</h2>
+<h3 id="how-things-may-go-wrong--data-may-not-be-separable-by-a-proper-function">How things may go wrong – Data may <em>not</em> be <strong>separable</strong> by a proper function…</h3>
+<br>
+<h4 id="solution-feature-engineering-map-data-into-a-different-space">Solution: <strong>feature engineering</strong> (map data into a different space)</h4>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><img src="./images/non-separable.png" alt="Non-linearly-separable data" style="width: 100%; max-width: 95vw; max-height: 50vh; object-fit: contain; ">
+<p>Non-linearly-separable data …
+<br>
+$(x, y)$</p>
+</div>
+<div class="col "><img src="./images/non-separable-polar.png" alt="Linearly-separable data" style="width: 100%; max-width: 95vw; max-height: 50vh; object-fit: contain; ">
+<p>… may be separable in <em>another space</em>
+<br>
+$(\rho = \sqrt{x^2 + y^2}$, $\theta = \arctan(y/x))$</p>
+</div>
+</div>
+</div>
+
+</section>
+</section>
+
+<section data-noprocess="" data-shortcode-slide="" id="ske">
+  
+<h1 id="symbolic-knowledge-extraction-ske">Symbolic Knowledge Extraction (SKE)</h1>
+<p>How to extract symbolic knowledge from sub-symbolic predictors</p>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="definition-and-motivation-pt-1">Definition and Motivation (pt. 1)</h2>
+<blockquote>
+<p>any <em>algorithmic procedure</em> accepting trained sub-symbolic predictors as input and producing <em>symbolic</em> knowledge as output, so that the extracted knowledge reflects the behaviour of the predictor with high <em>fidelity</em>.</p></blockquote>
+</section><section>
+<h2 id="definition-and-motivation-pt-2">Definition and Motivation (pt. 2)</h2>
+<ul>
+<li>
+<p><strong>Explainable AI (XAI)</strong>: SKE methods are often used to provide explanations for the decisions made by sub-symbolic predictors, making them more interpretable and understandable to humans (a.k.a. <em>post-hoc explainability</em>)</p>
+<ul>
+<li><em>local explanations</em>: explanations for individual predictions</li>
+<li><em>global explanations</em>: explanations for the overall behaviour of the predictor</li>
+</ul>
+</li>
+<li>
+<p><strong>Knowledge discovery</strong>: SKE methods can help discover patterns and relationships in the data that may not be immediately apparent, thus providing insights into the underlying processes</p>
+</li>
+<li>
+<p><strong>Model compression</strong>: SKE methods can simplify complex sub-symbolic models by extracting symbolic rules that approximate their behaviour, thus reducing the model’s size and complexity</p>
+</li>
+</ul>
+</section><section>
+<h2 id="explainability-vs-interpretability">Explainability vs Interpretability</h2>
+<p>They are <em>not</em> synonyms in spite of the fact that they are often used interchangeably!</p>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 style="text-align: center; color: blue">
+Explanation
+</h3>
+<ul>
+<li>
+<p>elicits <em>relevant aspects</em> of objects (to ease their interpretation)</p>
+</li>
+<li>
+<p>it is an operation that transform poorly interpretable objects into <em>more interpretable</em> ones</p>
+</li>
+<li>
+<p>search of a <em>surrogate</em> interpretable model</p>
+</li>
+</ul>
+</div>
+<div class="col "><h3 style="text-align: center; color: blue">
+Interpretation
+</h3>
+<ul>
+<li>
+<p>binds objects with <em>meaning</em> (what the human mind does)</p>
+</li>
+<li>
+<p>it is <em>subjective</em></p>
+</li>
+<li>
+<p>it does not need to be measurable, only <em>comparisons</em></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="concepts">Concepts</h2>
+<p>Main entities and how to extract symbolic knowledge from sub-symbolic predictors</p>
+</section><section>
+<h2 id="entities">Entities</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 style="text-align: center; color: blue">
+Sub-symbolic predictor
+</h3>
+<img src="./images/nn-iris.png" alt="Example of a neural network trained on the Iris dataset" style="width: 100%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+</div>
+<div class="col "><h3 style="text-align: center; color: blue">
+Symbolic knowledge
+</h3>
+<div style="margin-top: 10vh; margin-left: 5vw;">
+<table>
+  <thead>
+      <tr>
+          <th>Logic Rule</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Class = setosa ← PetalWidth ≤ 1.0</td>
+      </tr>
+      <tr>
+          <td>Class = versicolor ← PetalLength &gt; 4.9 ∧ <br><div style="margin-left: 15vw;"> SepalWidth ∈ [2.9, 3.2] </div></td>
+      </tr>
+      <tr>
+          <td>Class = versicolor ← PetalWidth &gt; 1.6</td>
+      </tr>
+      <tr>
+          <td>Class = virginica ← SepalWidth ≤ 2.9</td>
+      </tr>
+      <tr>
+          <td>Class = virginica ← SepalLength ∈ [5.4, 6.3]</td>
+      </tr>
+      <tr>
+          <td>Class = virginica ← PetalWidth ∈ [1.0, 1.6]</td>
+      </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="how-ske-works">How SKE works</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 style="text-align: center; color: blue">
+Decompositional SKE
+</h3>
+<blockquote>
+<p>if the method <em>needs</em> to inspect (even partially) the internal parameters of the underlying black-box predictor, e.g., neuron biases or connection weights for NNs, or support vectors for SVMs</p></blockquote>
+</div>
+<div class="col "><h3 style="text-align: center; color: blue">
+Pedagogical SKE
+</h3>
+<blockquote>
+<p>if the algorithm <em>does not need</em> to take into account any internal parameter, but it can extract symbolic knowledge by only relying on the predictor’s outputs.</p></blockquote>
+</div>
+</div>
+</div>
+
+</section>
+</section><section>
+<h2 id="overview">Overview</h2>
+<p>SKE methods: theory and practice</p>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="cart-pt-1">CART (pt. 1)</h2>
+<p>Classification and regression trees (cf. <a href="https://doi.org/10.1201/9781315139470">Breiman et al., 1984</a>)</p>
+</section><section>
+<h2 id="cart-pt-2">CART (pt. 2)</h2>
+<img src="./images/dt-kyphosis.png" alt="Example of a decision tree" style="width: 80%; max-width: 95vw; max-height: 60vh; object-fit: contain; ">
+<p>An example decision tree estimating the probability of kyphosis after spinal surgery, given the <em>age</em> of the patient and the vertebra at which surgery was <em>start</em> ed (rf. <a href="https://en.wikipedia.org/w/index.php?title=Decision_tree_learning">wiki:dt-learning</a>).
+Notice that all decision trees subtend a partition of the input space, and that those trees themselves provide intelligible representations of <em>how</em> predictions are attained.</p>
+</section><section>
+<h2 id="cart-pt-3">CART (pt. 3)</h2>
+<ol>
+<li>
+<p>generate a <em>synthetic</em> dataset by using the predictions of the sub-symbolic predictor</p>
+</li>
+<li>
+<p><em>train</em> a decision tree on the synthetic dataset</p>
+</li>
+<li>
+<p>compute the <em>fidelity</em> and repeat step 2 until satisfied</p>
+</li>
+<li>
+<p>[optional] rewrite the tree as a set of symbolic <em>rules</em></p>
+</li>
+</ol>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="practical-example-of-ske">Practical example of SKE</h2>
+<p>The Adult dataset (cf. <a href="https://doi.org/10.24432/C5XW20">Becker Barry and Kohavi Ronny, 1996</a>)</p>
+</section><section>
+<h2 id="adult-classification-task">Adult classification task</h2>
+<p>The Adult dataset contains the records (48,842) of individuals based on census data (this dataset is also known as Census Income).
+The dataset has many features (14) related to the individuals’ demographics, such as age, education, and occupation.
+The target feature is whether the individual earns more than $50,000 per year.</p>
+<br>
+<div style="text-align: center; color: blue;">Examples of Adult records</div>
+<br>
+<table>
+  <thead>
+      <tr>
+          <th>age</th>
+          <th>workclass</th>
+          <th>education</th>
+          <th>…</th>
+          <th>hours-per-week</th>
+          <th>native-country</th>
+          <th>income</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>39</td>
+          <td>State-gov</td>
+          <td>Bachelors</td>
+          <td>…</td>
+          <td>40</td>
+          <td>United-States</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>50</td>
+          <td>Self-emp-not-inc</td>
+          <td>Bachelors</td>
+          <td>…</td>
+          <td>13</td>
+          <td>United-States</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>38</td>
+          <td>Private</td>
+          <td>HS-grad</td>
+          <td>…</td>
+          <td>40</td>
+          <td>United-States</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>53</td>
+          <td>Private</td>
+          <td>11th</td>
+          <td>…</td>
+          <td>40</td>
+          <td>United-States</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>28</td>
+          <td>Private</td>
+          <td>Bachelors</td>
+          <td>…</td>
+          <td>40</td>
+          <td>Cuba</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>37</td>
+          <td>Private</td>
+          <td>Masters</td>
+          <td>…</td>
+          <td>40</td>
+          <td>United-States</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>49</td>
+          <td>Private</td>
+          <td>9th</td>
+          <td>…</td>
+          <td>16</td>
+          <td>Jamaica</td>
+          <td>&lt;=50K</td>
+      </tr>
+      <tr>
+          <td>52</td>
+          <td>Self-emp-not-inc</td>
+          <td>HS-grad</td>
+          <td>…</td>
+          <td>45</td>
+          <td>United-States</td>
+          <td>&gt;50K</td>
+      </tr>
+      <tr>
+          <td>31</td>
+          <td>Private</td>
+          <td>Masters</td>
+          <td>…</td>
+          <td>50</td>
+          <td>United-States</td>
+          <td>&gt;50K</td>
+      </tr>
+      <tr>
+          <td>42</td>
+          <td>Private</td>
+          <td>Bachelors</td>
+          <td>…</td>
+          <td>40</td>
+          <td>United-States</td>
+          <td>&gt;50K</td>
+      </tr>
+  </tbody>
+</table>
+</section><section>
+<h2 id="what-we-will-do">What we will do</h2>
+<ol>
+<li>
+<p>Download the Adult dataset and preprocess it</p>
+</li>
+<li>
+<p>Train a sub-symbolic predictor – a <em>neural network</em> – on the Adult dataset</p>
+</li>
+<li>
+<p>Use a <em>pedagogical SKE method</em> – CART – to extract symbolic knowledge from the trained neural network</p>
+</li>
+<li>
+<p>Visualise the extracted symbolic knowledge as a <em>decision tree</em> and as a set of <em>rules</em></p>
+</li>
+</ol>
+</section><section>
+<h2 id="jump-to-the-code">Jump to the code</h2>
+<p>GitHub repository at <a href="https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/extraction.ipynb">https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/extraction.ipynb</a></p>
+<img src="./images/ske-notebook-qr.svg" alt="QR code to the Jupyter notebook" style="width: 20%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="taxonomy-of-ske-methods-pt-1">Taxonomy of SKE methods (pt. 1)</h2>
+<img src="./images/ske-taxonomy.svg" alt="Taxonomy of SKE methods" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="taxonomy-of-ske-methods-pt-2">Taxonomy of SKE methods (pt. 2)</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "></div>
+<div class="col "><h3 style="color: blue">
+Target AI task
+</h3>
+<ul>
+<li>
+<p><em>classification</em><br> $f: 𝒳 ⊆ ℝⁿ → 𝒴 s.t. |𝒴| = k$</p>
+</li>
+<li>
+<p><em>regression</em><br> $f: 𝒳 ⊆ ℝⁿ → 𝒴 ⊆ ℝᵐ$</p>
+</li>
+</ul>
+</div>
+<div class="col "><h3 style="color: blue">
+Input data
+</h3>
+<ul>
+<li>
+<p><em>binary</em><br> $𝒳 ≡ {0, 1}ⁿ$</p>
+</li>
+<li>
+<p><em>discrete</em><br> $𝒳 ∈ {x₁, …, xₙ}ⁿ$</p>
+</li>
+<li>
+<p><em>continuous</em><br> $𝒳 ⊆ ℝⁿ$</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="taxonomy-of-ske-methods-pt-3">Taxonomy of SKE methods (pt. 3)</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 style="text-align: center; color: blue">
+Shape
+</h3>
+<ul>
+<li>
+<p><em>rule list</em>, ordered sequences of if-then-else rules</p>
+</li>
+<li>
+<p><em>decision tree</em>, hierarchical set of if-then-else rules involving a comparison among a variable and a constant</p>
+</li>
+<li>
+<p><em>decision table</em>, 2D tables summarising decisions for each possible assignment of the input variables</p>
+</li>
+</ul>
+</div>
+<div class="col "><h3 style="text-align: center; color: blue">
+Expressiveness
+</h3>
+<ul>
+<li>
+<p><em>propositional</em>, boolean statements + logic connectives, including arithmetic comparisons among variables and constants</p>
+</li>
+<li>
+<p><em>fuzzy</em>, hierarchical set of if-then-else rules involving a comparison among a variable and a constant</p>
+</li>
+<li>
+<p><em>oblique</em>, boolean statements + logic connectives + arithmetic comparisons</p>
+</li>
+<li>
+<p><em>M-of-N</em>, any of the above + statements of the form “at least $k$ of the following statements are true”</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="discussion">Discussion</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 id="notable-remarks"><strong>Notable remarks</strong></h3>
+<ul>
+<li>
+<p>discretisation of the input space</p>
+</li>
+<li>
+<p>discretisation of the output space</p>
+</li>
+<li>
+<p>features should have semantic meaning</p>
+</li>
+<li>
+<p>rules constitutes global explanations</p>
+</li>
+</ul>
+</div>
+<div class="col "><h3 id="limitations"><strong>Limitations</strong></h3>
+<ul>
+<li>
+<p>tabular data as input, no images</p>
+</li>
+<li>
+<p>high dimensional datasets could lead to poorly readable rules</p>
+</li>
+<li>
+<p>high variable input spaces could do the same</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="future-research-activities">Future research activities</h2>
+<ul>
+<li>
+<p>target images or highly dimensional data in general</p>
+</li>
+<li>
+<p>target reinforcement learning (when based on NN)</p>
+</li>
+<li>
+<p>target unsupervised learning</p>
+</li>
+<li>
+<p>design and prototype your own extraction algorithm</p>
+</li>
+</ul>
+
+</section>
+</section>
+
+<section data-noprocess="" data-shortcode-slide="" id="ski">
+  
+<h1 id="symbolic-knowledge-injection-ski">Symbolic Knowledge Injection (SKI)</h1>
+<p>How to inject symbolic knowledge into sub-symbolic predictors</p>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="definition-and-motivation-pt-1">Definition and Motivation (pt. 1)</h2>
+<blockquote>
+<p>Any algorithmic procedure affecting how sub-symbolic predictors draw their inferences in such a way that predictions are either <em>computed</em> as a function of, or <em>made consistent</em> with, some given symbolic knowledge.</p></blockquote>
+</section><section>
+<h2 id="definition-and-motivation-pt-2">Definition and Motivation (pt. 2)</h2>
+<ul>
+<li>
+<p><strong>Improve predictive performance</strong>: by injecting symbolic knowledge, we can</p>
+<ul>
+<li><em>guide</em> the learning process in order to <em>penalise</em> inconsistencies with the symbolic knowledge, or</li>
+<li><em>structure</em> the model’s architecture to <em>mimic</em> the symbolic knowledge</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhance interpretability</strong>: with SKI we can make predictors that are</p>
+<ul>
+<li>interpretable by <em>transparent box design</em>, as they are built to mimic symbolic knowledge</li>
+<li>interpretable using <em>symbols as constraints</em>, as they are built to respect symbolic knowledge</li>
+</ul>
+</li>
+<li>
+<p><strong>Robustness to data degradation</strong>: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of noisy or scarcity of data</p>
+</li>
+<li>
+<p><strong>Enhance fairness</strong>: by incorporating symbolic knowledge about fairness constraints, we can ensure that sub-symbolic models make decisions that align with ethical considerations</p>
+</li>
+<li>
+<p><strong>And more</strong>: SKI can simplify the predictor’s architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting</p>
+</li>
+</ul>
+</section><section>
+<h2 id="concepts">Concepts</h2>
+<p>Main entities and how to inject symbolic knowledge into sub-symbolic predictors</p>
+</section><section>
+<h2 id="entities">Entities</h2>
+<ul>
+<li>
+<p><strong>Predictor</strong>: a sub-symbolic model that makes predictions based on input data, usually a neural network</p>
+</li>
+<li>
+<p><strong>Symbolic knowledge</strong>: structured, formal knowledge that can be represented in a symbolic form. The most common forms of symbolic knowledge are</p>
+<ul>
+<li><em>Propositional logic</em>, simple rules with if-then structure</li>
+<li><em>Datalog</em>, a subset of first-order logic with no function symbols, only constants and variables</li>
+</ul>
+</li>
+<li>
+<p><strong>Fuzzification</strong>: the process of converting symbolic knowledge into a form that can be used by sub-symbolic predictors, e.g. by assigning degrees of truth to symbolic statements</p>
+</li>
+<li>
+<p><strong>Injector</strong>: the main component that injects symbolic knowledge into the predictor, by modifying its architecture, its training process or by other means</p>
+</li>
+</ul>
+</section><section>
+<h2 id="structuring">Structuring</h2>
+<img src="./images/workflow-structuring.svg" alt="Overview of structuring injection mechanism" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="constraining">Constraining</h2>
+<img src="./images/workflow-constraining.svg" alt="Overview of constraining injection mechanism" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="embedding">Embedding</h2>
+<img src="./images/workflow-embedding.svg" alt="Overview of embedding injection mechanism" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section>
+</section><section>
+<h2 id="overview-1">Overview</h2>
+<p>SKI methods: theory and practice</p>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="knowledge-injection-via-network-structuring-kins">Knowledge Injection via Network Structuring (KINS)</h2>
+<p>(ref. <a href="https://doi.org/10.1093/LOGCOM/EXAD037">Magnini et al., 2023</a>)</p>
+</section><section>
+<h2 id="fuzzification">Fuzzification</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Formula</th>
+          <th>C. interpretation</th>
+          <th>Formula</th>
+          <th>C. interpretation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>$[[ \neg \phi ]]$</td>
+          <td>$\eta(1 - [[ \phi ]])$</td>
+          <td>$[[ \phi \le \psi ]]$</td>
+          <td>$\eta(1 + [[ \psi ]] - [[ \phi ]])$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi \wedge \psi ]]$</td>
+          <td>$\eta(\min([[ \phi ]], [[ \psi ]]))$</td>
+          <td>$[[ class(\bar{X}, {y}_i) \leftarrow \psi ]]$</td>
+          <td>$[[ \psi ]]^{*}$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi \vee \psi ]]$</td>
+          <td>$\eta(\max([[ \phi ]], [[ \psi ]]))$</td>
+          <td>$[[ \text{expr}(\bar{X}) ]]$</td>
+          <td>$\text{expr}([[ \bar{X} ]])$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi = \psi ]]$</td>
+          <td>$\eta([[ \neg( \phi \ne \psi ) ]])$</td>
+          <td>$[[ \mathtt{true} ]]$</td>
+          <td>$1$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi \ne \psi ]]$</td>
+          <td>$\eta(| [[ \phi ]] - [[ \psi ]]|)$</td>
+          <td>$[[ \mathtt{false} ]]$</td>
+          <td>$0$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi &gt; \psi ]]$</td>
+          <td>$\eta(\max(0, \frac{1}{2} + [[ \phi ]] - [[ \psi ]]))$</td>
+          <td>$[[ X ]]$</td>
+          <td>$x$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi \ge \psi ]]$</td>
+          <td>$\eta(1 + [[ \phi ]] - [[ \psi ]])$</td>
+          <td>$[[ k ]]$</td>
+          <td>$k$</td>
+      </tr>
+      <tr>
+          <td>$[[ \phi &lt; \psi ]]$</td>
+          <td>$\eta(\max(0, \frac{1}{2} + [[ \psi ]] - [[ \phi ]]))$</td>
+          <td>$[[ p(\bar{X}) ]]^{**}$</td>
+          <td>$[[ \psi_1 \vee \ldots \vee \psi_k ]]$</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>$^{*}$ encodes the value for the $i^{\text{th}}$ output
+$^{**}$ assuming $p$ is defined by $k$ clauses of the form:
+${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></blockquote>
+</section><section>
+<h2 id="injector-pt1">Injector (pt.1)</h2>
+<img src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="injector-pt-2">Injector (pt. 2)</h2>
+<img src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="knowledge-injection-via-lambda-layer-kill">Knowledge Injection via Lambda Layer (KILL)</h2>
+<p>(ref. <a href="https://ceur-ws.org/Vol-3261/paper5.pdf">Magnini et al., 2022</a>)</p>
+</section><section>
+<h2 id="fuzzification">Fuzzification</h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Formula</strong></th>
+          <th><strong>C. interpretation</strong></th>
+          <th></th>
+          <th><strong>Formula</strong></th>
+          <th><strong>C. interpretation</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[[\neg \phi]]</td>
+          <td>$\eta(1 - [[\phi]])$</td>
+          <td></td>
+          <td>[[\phi \le \psi]]</td>
+          <td>$\eta([[\phi]] - [[\psi]])$</td>
+      </tr>
+      <tr>
+          <td>[[\phi \wedge \psi]]</td>
+          <td>$\eta(\max([[\phi]], [[\psi]]))$</td>
+          <td></td>
+          <td>$[\mathrm{class}(\bar{X}, {y}_i) \leftarrow \psi]]$</td>
+          <td>$[[\psi]]^{*}$</td>
+      </tr>
+      <tr>
+          <td>[[\phi \vee \psi]]</td>
+          <td>$\eta(\min([[\phi]], [[\psi]]))$</td>
+          <td></td>
+          <td>$[\text{expr}(\bar{X})]]$</td>
+          <td>$\text{expr}([[\bar{X}]])$</td>
+      </tr>
+      <tr>
+          <td>[[\phi = \psi]]</td>
+          <td>$\eta(\left\lvert [[\phi]] - [[\psi]] \right\rvert)$</td>
+          <td></td>
+          <td>$[[\mathtt{true}]]$</td>
+          <td>$0$</td>
+      </tr>
+      <tr>
+          <td>[[\phi \ne \psi]]</td>
+          <td>$[[\neg(\phi = \psi)]]$</td>
+          <td></td>
+          <td>$[[\mathtt{false}]]$</td>
+          <td>$1$</td>
+      </tr>
+      <tr>
+          <td>[[\phi &gt; \psi]]</td>
+          <td>$\eta(\frac{1}{2} - [[\phi]] + [[\psi]])$</td>
+          <td></td>
+          <td>$[[X]]$</td>
+          <td>$x$</td>
+      </tr>
+      <tr>
+          <td>[[\phi \ge \psi]]</td>
+          <td>$\eta([[\psi]] - [[\phi]])$</td>
+          <td></td>
+          <td>$[[{k}]]$</td>
+          <td>$k$</td>
+      </tr>
+      <tr>
+          <td>[[\phi &lt; \psi]]</td>
+          <td>$\eta(\frac{1}{2} + [[\phi]] - [[\psi]])$</td>
+          <td></td>
+          <td>$[\mathrm{p}(\bar{X})]]^{**}$</td>
+          <td>$[[\psi_1 \vee \ldots \vee \psi_k]]$</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>$^{*}$ encodes the penalty for the $i^{\text{th}}$ neuron
+$^{**}$ assuming predicate $p$ is defined by $k$ clauses of the form:
+${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$</p></blockquote>
+</section><section>
+<h2 id="injector-pt1">Injector (pt.1)</h2>
+<p><em>Cost function</em>: whenever the neural network wrongly predicts a class and violates the prior knowledge a cost proportional to the violation is added.
+In this way the output of the network differs more from the expected one and this affects the back propagation step.
+<br><br></p>
+<div style="border: 1px solid #ddd; padding: 1em; background-color: #f9f9f9; border-radius: 8px; overflow-x: auto;">
+$$
+\begin{aligned}
+Y' &amp;= f(Y, \mathrm{cost}) \\\\
+f &amp;= Y \times (\mathbf{1} + \mathrm{cost}) \\\\
+\mathrm{cost}(X, Y) &amp;= \eta(\mathrm{p}(X) - (\mathbf{1} - Y)) \quad \text{(}\mathbf{1} - Y\text{ because 0 means true)}
+\end{aligned}
+$$
+</div>
+</section><section>
+<h2 id="injector-pt-2">Injector (pt. 2)</h2>
+<img src="./images/lambda-layer.svg" alt="Example of a neural network architecture with a lambda layer" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="practical-example-of-ski">Practical example of SKI</h2>
+<p>The poker hand data set (PHDS) (cf. <a href="https://doi.org/10.24432/C5KW38">Cattral Robert and Oppacher Franz, 2002</a>)</p>
+</section><section>
+<h2 id="phds-classification-task">PHDS classification task</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><div style="margin-top: 25vh; margin-left: 5vw;">
+<ul>
+<li>
+<p>Each record represents one poker hand</p>
+</li>
+<li>
+<p>5 cards identified by 2 values: suit and rank</p>
+</li>
+<li>
+<p>Classes: 10</p>
+</li>
+<li>
+<p>Training set: 25,010</p>
+</li>
+<li>
+<p>Test set: 1,000,000</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="col "><table>
+  <thead>
+      <tr>
+          <th><strong>id</strong></th>
+          <th><strong>S1</strong></th>
+          <th><strong>R1</strong></th>
+          <th><strong>S2</strong></th>
+          <th><strong>R2</strong></th>
+          <th><strong>S3</strong></th>
+          <th><strong>R3</strong></th>
+          <th><strong>S4</strong></th>
+          <th><strong>R4</strong></th>
+          <th><strong>S5</strong></th>
+          <th><strong>R5</strong></th>
+          <th><strong>class</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>10</td>
+          <td>1</td>
+          <td>11</td>
+          <td>1</td>
+          <td>13</td>
+          <td>1</td>
+          <td>12</td>
+          <td>1</td>
+          <td>1</td>
+          <td>9</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>2</td>
+          <td>11</td>
+          <td>2</td>
+          <td>13</td>
+          <td>2</td>
+          <td>10</td>
+          <td>2</td>
+          <td>12</td>
+          <td>2</td>
+          <td>1</td>
+          <td>9</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>3</td>
+          <td>12</td>
+          <td>3</td>
+          <td>11</td>
+          <td>3</td>
+          <td>13</td>
+          <td>3</td>
+          <td>10</td>
+          <td>3</td>
+          <td>1</td>
+          <td>9</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>4</td>
+          <td>10</td>
+          <td>4</td>
+          <td>11</td>
+          <td>4</td>
+          <td>1</td>
+          <td>4</td>
+          <td>13</td>
+          <td>4</td>
+          <td>12</td>
+          <td>9</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>4</td>
+          <td>1</td>
+          <td>4</td>
+          <td>13</td>
+          <td>4</td>
+          <td>12</td>
+          <td>4</td>
+          <td>11</td>
+          <td>4</td>
+          <td>10</td>
+          <td>9</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>4</td>
+          <td>1</td>
+          <td>5</td>
+          <td>1</td>
+          <td>3</td>
+          <td>1</td>
+          <td>6</td>
+          <td>8</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>1</td>
+          <td>9</td>
+          <td>1</td>
+          <td>12</td>
+          <td>1</td>
+          <td>10</td>
+          <td>1</td>
+          <td>11</td>
+          <td>1</td>
+          <td>13</td>
+          <td>8</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>2</td>
+          <td>1</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
+          <td>3</td>
+          <td>2</td>
+          <td>4</td>
+          <td>2</td>
+          <td>5</td>
+          <td>8</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>3</td>
+          <td>5</td>
+          <td>3</td>
+          <td>6</td>
+          <td>3</td>
+          <td>9</td>
+          <td>3</td>
+          <td>7</td>
+          <td>3</td>
+          <td>8</td>
+          <td>8</td>
+      </tr>
+      <tr>
+          <td>10</td>
+          <td>4</td>
+          <td>1</td>
+          <td>4</td>
+          <td>4</td>
+          <td>4</td>
+          <td>2</td>
+          <td>4</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>8</td>
+      </tr>
+      <tr>
+          <td>11</td>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>3</td>
+          <td>9</td>
+          <td>1</td>
+          <td>5</td>
+          <td>2</td>
+          <td>3</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>12</td>
+          <td>2</td>
+          <td>6</td>
+          <td>2</td>
+          <td>1</td>
+          <td>4</td>
+          <td>13</td>
+          <td>2</td>
+          <td>4</td>
+          <td>4</td>
+          <td>9</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>13</td>
+          <td>1</td>
+          <td>10</td>
+          <td>4</td>
+          <td>6</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+          <td>3</td>
+          <td>8</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>2</td>
+          <td>13</td>
+          <td>2</td>
+          <td>1</td>
+          <td>4</td>
+          <td>4</td>
+          <td>1</td>
+          <td>5</td>
+          <td>2</td>
+          <td>11</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>15</td>
+          <td>3</td>
+          <td>8</td>
+          <td>4</td>
+          <td>12</td>
+          <td>3</td>
+          <td>9</td>
+          <td>4</td>
+          <td>2</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+      </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="logic-rules-to-inject-pt-1">Logic rules to inject (pt. 1)</h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Class</strong></th>
+          <th><strong>Logic Formulation</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Pair</strong></td>
+          <td><code>class(R₁, ..., S₅, pair) ← pair(R₁, ..., S₅)</code><br><code>pair(R₁, ..., S₅) ← R₁ = R₂</code><br><code>pair(R₁, ..., S₅) ← R₁ = R₃</code><br><code>pair(R₁, ..., S₅) ← R₁ = R₄</code><br><code>pair(R₁, ..., S₅) ← R₁ = R₅</code><br><code>pair(R₁, ..., S₅) ← R₂ = R₃</code><br><code>pair(R₁, ..., S₅) ← R₂ = R₄</code><br><code>pair(R₁, ..., S₅) ← R₂ = R₅</code><br><code>pair(R₁, ..., S₅) ← R₃ = R₄</code><br><code>pair(R₁, ..., S₅) ← R₃ = R₅</code><br><code>pair(R₁, ..., S₅) ← R₄ = R₅</code></td>
+      </tr>
+  </tbody>
+</table>
+</section><section>
+<h2 id="logic-rules-to-inject-pt-2">Logic rules to inject (pt. 2)</h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Class</strong></th>
+          <th><strong>Logic Formulation</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Two Pairs</strong></td>
+          <td><code>class(R₁, ..., S₅, two) ← two(R₁, ..., S₅)</code><br><code>two(R₁, ..., S₅) ← R₁ = R₂ ∧ R₃ = R₄</code><br><code>two(R₁, ..., S₅) ← R₁ = R₃ ∧ R₂ = R₄</code><br><code>two(R₁, ..., S₅) ← R₁ = R₄ ∧ R₂ = R₃</code><br><code>two(R₁, ..., S₅) ← R₁ = R₂ ∧ R₃ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₃ ∧ R₃ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₅ ∧ R₂ = R₃</code><br><code>two(R₁, ..., S₅) ← R₁ = R₂ ∧ R₄ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₄ ∧ R₂ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₅ ∧ R₂ = R₄</code><br><code>two(R₁, ..., S₅) ← R₁ = R₃ ∧ R₄ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₄ ∧ R₃ = R₅</code><br><code>two(R₁, ..., S₅) ← R₁ = R₅ ∧ R₃ = R₄</code><br><code>two(R₁, ..., S₅) ← R₂ = R₃ ∧ R₄ = R₅</code><br><code>two(R₁, ..., S₅) ← R₂ = R₄ ∧ R₃ = R₅</code><br><code>two(R₁, ..., S₅) ← R₂ = R₅ ∧ R₃ = R₄</code></td>
+      </tr>
+  </tbody>
+</table>
+</section><section>
+<h2 id="logic-rules-to-inject-pt-3">Logic rules to inject (pt. 3)</h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Class</strong></th>
+          <th><strong>Logic Formulation</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Three of a Kind</strong></td>
+          <td><code>class(R₁, ..., S₅, three) ← three(R₁, ..., S₅)</code><br><code>three(R₁, ..., S₅) ← R₁ = R₂ ∧ R₁ = R₃</code><br><code>three(R₁, ..., S₅) ← R₁ = R₂ ∧ R₁ = R₄</code><br><code>three(R₁, ..., S₅) ← R₁ = R₂ ∧ R₁ = R₅</code><br><code>three(R₁, ..., S₅) ← R₁ = R₃ ∧ R₁ = R₄</code><br><code>three(R₁, ..., S₅) ← R₁ = R₃ ∧ R₁ = R₅</code><br><code>three(R₁, ..., S₅) ← R₁ = R₄ ∧ R₁ = R₅</code><br><code>three(R₁, ..., S₅) ← R₂ = R₃ ∧ R₂ = R₄</code><br><code>three(R₁, ..., S₅) ← R₂ = R₃ ∧ R₂ = R₅</code><br><code>three(R₁, ..., S₅) ← R₂ = R₄ ∧ R₂ = R₅</code><br><code>three(R₁, ..., S₅) ← R₃ = R₄ ∧ R₃ = R₅</code></td>
+      </tr>
+      <tr>
+          <td><strong>Flush</strong></td>
+          <td><code>class(R₁, ..., S₅, flush) ← flush(R₁, ..., S₅)</code><br><code>flush(R₁, ..., S₅) ← S₁ = S₂ ∧ S₁ = S₃ ∧ S₁ = S₄ ∧ S₁ = S₅</code></td>
+      </tr>
+  </tbody>
+</table>
+</section><section>
+<h2 id="what-we-will-do">What we will do</h2>
+<ol>
+<li>
+<p>Download the PHDS dataset and preprocess it</p>
+</li>
+<li>
+<p>Define the <em>symbolic knowledge</em> to inject</p>
+</li>
+<li>
+<p>Train a sub-symbolic predictor – a <em>neural network</em> – on the PHDS dataset</p>
+</li>
+<li>
+<p>Train a second neural network with the symbolic knowledge injected</p>
+</li>
+<li>
+<p>We will inject the knowledge in the <em>loss function</em></p>
+</li>
+<li>
+<p>Visualise and compare the results of the two predictors</p>
+</li>
+</ol>
+</section><section>
+<h2 id="jump-to-the-code">Jump to the code!</h2>
+<p>GitHub repository at <a href="https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/injection.ipynb">https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/injection.ipynb</a></p>
+<img src="./images/ski-notebook-qr.svg" alt="QR code to the Jupyter notebook" style="width: 20%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="taxonomy-of-ski-methods-pt-1">Taxonomy of SKI methods (pt. 1)</h2>
+<img src="./images/ski-taxonomy.svg" alt="Taxonomy of SKI methods" style="width: 80%; max-width: 95vw; max-height: 80vh; object-fit: contain; ">
+</section><section>
+<h2 id="taxonomy-of-ski-methods-pt-2">Taxonomy of SKI methods (pt. 2)</h2>
+<ul>
+<li>
+<p><strong>input knowledge</strong>: how is the knowledge to-be-injected represented?</p>
+<ul>
+<li>commonly, some sub-set of first-order logic (FOL)</li>
+</ul>
+</li>
+<li>
+<p><strong>target predictor</strong>: which predictors can knowledge be injected into?</p>
+<ul>
+<li>mostly, neural networks</li>
+</ul>
+</li>
+<li>
+<p><strong>strategy</strong>: how does injection actually work?</p>
+<ul>
+<li><em>guided learning</em>: the input knowledge is used to <em>guide the training</em> process</li>
+<li><em>structuring</em>: the <em>internal</em> composition of the predictor is <em>(re-)structured</em> to reflect the input knowledge</li>
+<li><em>embedding</em>: the input knowledge is <em>converted</em> into numeric array form</li>
+</ul>
+</li>
+<li>
+<p><strong>purpose</strong>: why is knowledge injected in the first place?</p>
+<ul>
+<li><em>knowledge manipulation</em>: improve / extend / reason about symbol knowledge—subsymbolically</li>
+<li><em>learning support</em>: improve the sub-symbolic predictor (e.g. speed, size, etc.)</li>
+</ul>
+</li>
+</ul>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="discussion">Discussion</h2>
+<div class="container w-100 m-0 p-0">
+    <div class="row "><div class="col "><h3 style="text-align: center; color: blue">
+Notable remarks
+</h3>
+<ul>
+<li>
+<p>Knowledge should express relations about input-output pairs</p>
+</li>
+<li>
+<p>embedding implies <em>extensional</em> representation of knowledge</p>
+</li>
+<li>
+<p>guided learning and structuring support <em>intensional</em> knowledge</p>
+</li>
+<li>
+<p>propositional knowledge implies binarising the I/O space</p>
+</li>
+</ul>
+</div>
+<div class="col "><h3 style="text-align: center; color: blue">
+Limitations
+</h3>
+<ul>
+<li>
+<p>Recursive data structures are natively not supported</p>
+</li>
+<li>
+<p>extensional representation cost storage</p>
+</li>
+<li>
+<p>guided learning works poorly with lacking data</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section>
+<h2 id="future-research-activities">Future research activities</h2>
+<ul>
+<li>
+<p><em>foundational</em><br> address recursion</p>
+</li>
+<li>
+<p><em>practical</em><br> find a language that is a good balance between expressiveness and ease of use</p>
+</li>
+<li>
+<p><em>target</em><br> apply to large language models</p>
+</li>
+</ul>
+
+</section>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-hugo/object-assign.js"></script>
+
+<a href="/talk-2025-kiu-nesy/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"1080","highlight_theme":"solarized-dark","history":true,"mermaid":[{}],"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/talk-2025-kiu-nesy/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/talk-2025-kiu-nesy/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = {
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+      var ytVideos = document.getElementsByTagName("iframe")
+      for (let i = 0; i < ytVideos.length; i++) {
+          var videoFrame = ytVideos[i]
+          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+          if (isYouTube) {
+              console.log(`Removing ${videoFrame.src}`)
+              var parent = videoFrame.parentElement
+              videoFrame.remove()
+              var p = document.createElement('p')
+              p.append(
+                  document.createTextNode(
+                      "There was an embedded video here, but it is disabled in the printed version of the slides."
+                  )
+              )
+              p.append(document.createElement('br'))
+              p.append(
+                  document.createTextNode(
+                      `Visit instead ${
+                          videoFrame.src
+                      } or ${
+                          videoFrame.src.replace(
+                              /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                              "https://www.youtube.com/watch?v=$4"
+                          )
+                      }`
+                  )
+              )
+              parent.appendChild(p)
+          }
+      }
+  }
+</script>
+
+
+    
+  
+
+</body></html>
