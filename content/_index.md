@@ -16,15 +16,12 @@ outputs = ["Reveal"]
 <br>Dipartimento di Informatica — Scienza e Ingegneria (DISI), Sede di Cesena,
 <br> Alma Mater Studiorum—Università di Bologna
 
-<br>[Mini-school](https://sites.google.com/view/woa2025/mini-school) @ [WOA 2025, the 26th Workshop From Objects to Agents](https://sites.google.com/view/woa2025)
-<br>2nd July 2025, Trento, Italy
+<br>[School on Symbolic and Statistical Methods for Reasoning and Processing Formal Expressions](https://europroofnet.github.io/Kutaisi25/)
+<br>July 8–9, 2025, Kutaisi, Georgia
 
-<br>
-<span class="hint">
-This talk is partially supported by the “ENGINES — ENGineering INtElligent Systems around intelligent agent technologies”
-project funded by the Italian MUR program “PRIN 2022” under grant number 20229ZXBZM.
-</span>
-<br>{{< image src="./images/engines_logo.jpg" alt="ENGINES project logo" width="70px" >}}
+{{< image alt="EPN Logo" src="https://europroofnet.github.io/assets/images/epn-logo.svg" height="10vh" >}}
+{{< image alt="COST Logo" src="https://europroofnet.github.io/assets/images/COST_LOGO_rgb_highresolution.jpg" height="10vh" >}}
+{{< image alt="EU Logo" src="https://www.cost.eu/uploads/2021/10/EN-Funded-by-the-EU-PANTONE-1024x215.jpg" height="10vh" >}}
 
 ---
 
