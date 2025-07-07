@@ -1003,15 +1003,15 @@ How to inject symbolic knowledge into sub-symbolic predictors
   - _guide_ the learning process in order to _penalise_ inconsistencies with the symbolic knowledge, or
   - _structure_ the model's architecture to _mimic_ the symbolic knowledge
 
-- **Enhance interpretability**: with SKI we can make predictors that are
-  - interpretable by _transparent box design_, as they are built to mimic symbolic knowledge
-  - interpretable using _symbols as constraints_, as they are built to respect symbolic knowledge
+- **Enhance trustworthiness**: SKI let us train predictors that are
+  - _transparent by design_, as they are built to mimic symbolic knowledge...
+  - ... i.e. they use _symbols as constraints_, as they are built to respect symbolic knowledge
 
-- **Robustness to data degradation**: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of noisy or scarcity of data
+- **Robustness to data degradation**: symbolic knowledge can help sub-symbolic models maintain performance even in the presence of _noisy data_ or _data scarcity_
 
-- **Enhance fairness**: by incorporating symbolic knowledge about fairness constraints, we can ensure that sub-symbolic models make decisions that align with ethical considerations
+- **Enhance fairness**: by incorporating symbolic knowledge about _fairness constraints_, we can push sub-symbolic models towards making decisions that align with _ethical requirements_
 
-- **And more**: SKI can simplify the predictor's architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting
+<!-- - **And more**: SKI can simplify the predictor's architecture, in particular it can reduce the number of weights in a neural network, thus improving its efficiency and reducing the risk of overfitting -->
 
 ---
 
@@ -1022,15 +1022,13 @@ Main entities and how to inject symbolic knowledge into sub-symbolic predictors
 
 ## Entities
 
-- **Predictor**: a sub-symbolic model that makes predictions based on input data, usually a neural network
+- **Predictor**: a sub-symbolic model that makes predictions based on input data, usually a _neural network_
 
-- **Symbolic knowledge**: structured, formal knowledge that can be represented in a symbolic form. The most common forms of symbolic knowledge are
-  - _Propositional logic_, simple rules with if-then structure
-  - _Datalog_, a subset of first-order logic with no function symbols, only constants and variables
+- **Symbolic knowledge**: structured, formal knowledge that _predictors should comply_ with
 
-- **Fuzzification**: the process of converting symbolic knowledge into a form that can be used by sub-symbolic predictors, e.g. by assigning degrees of truth to symbolic statements
+- **Fuzzification**: the process of _converting_ symbolic knowledge into a _real functions_
 
-- **Injector**: the main component that injects symbolic knowledge into the predictor, by modifying its architecture, its training process or by other means
+- **Injector**: the algorithm actually performing SKI, by modifying neural architectures, training processes, etc.
 
 ---
 
@@ -1083,6 +1081,7 @@ SKI methods: theory and practice
 
 
 > $^{*}$ encodes the value for the $i^{\text{th}}$ output
+> <br>
 > $^{**}$ assuming $p$ is defined by $k$ clauses of the form:
 > ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$
 
@@ -1090,13 +1089,13 @@ SKI methods: theory and practice
 
 ## Injector (pt.1)
 
-{{< image src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" width="80%" >}}
+{{< image src="./images/neurons.svg" alt="Example of one possible mapping between the continuous interpretation of a symbolic formula and the neurons" width="80%" max-h="70vh" >}}
 
 ---
 
 ## Injector (pt. 2)
 
-{{< image src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" width="80%" >}}
+{{< image src="./images/net-architecture.svg" alt="Example of a neural network architecture with an injector" width="80%" max-h="70vh" >}}
 
 {{% /section %}}
 
@@ -1113,16 +1112,17 @@ SKI methods: theory and practice
 
 | **Formula**            | **C. interpretation**                                |   | **Formula**                                         | **C. interpretation**                |
 |------------------------|------------------------------------------------------|---|-----------------------------------------------------|--------------------------------------|
-| \[\[\neg \phi]]        | $\eta(1 - [[\phi]])$                                 |   | \[\[\phi \le \psi]]                                 | $\eta([[\phi]] - [[\psi]])$          |
-| \[\[\phi \wedge \psi]] | $\eta(\max([[\phi]], [[\psi]]))$                     |   | $[\mathrm{class}(\bar{X}, {y}_i) \leftarrow \psi]]$ | $[[\psi]]^{*}$                       |
-| \[\[\phi \vee \psi]]   | $\eta(\min([[\phi]], [[\psi]]))$                     |   | $[\text{expr}(\bar{X})]]$                           | $\text{expr}([[\bar{X}]])$           |
-| \[\[\phi = \psi]]      | $\eta(\left\lvert [[\phi]] - [[\psi]] \right\rvert)$ |   | $[[\mathtt{true}]]$                                 | $0$                                  |
-| \[\[\phi \ne \psi]]    | $[[\neg(\phi = \psi)]]$                              |   | $[[\mathtt{false}]]$                                | $1$                                  |
-| \[\[\phi > \psi]]      | $\eta(\frac{1}{2} - [[\phi]] + [[\psi]])$            |   | $[[X]]$                                             | $x$                                  |
-| \[\[\phi \ge \psi]]    | $\eta([[\psi]] - [[\phi]])$                          |   | $[[{k}]]$                                           | $k$                                  |
-| \[\[\phi < \psi]]      | $\eta(\frac{1}{2} + [[\phi]] - [[\psi]])$            |   | $[\mathrm{p}(\bar{X})]]^{**}$                       | $[[\psi_1 \vee \ldots \vee \psi_k]]$ |
+| $[[\neg \phi]]$        | $\eta(1 - [[\phi]])$                                 |   | \[\[\phi \le \psi]]                                 | $\eta([[\phi]] - [[\psi]])$          |
+| $[[\phi \wedge \psi]]$ | $\eta(\max([[\phi]], [[\psi]]))$                     |   | $[\mathrm{class}(\bar{X}, {y}_i) \leftarrow \psi]]$ | $[[\psi]]^{*}$                       |
+| $[[\phi \vee \psi]]$   | $\eta(\min([[\phi]], [[\psi]]))$                     |   | $[\text{expr}(\bar{X})]]$                           | $\text{expr}([[\bar{X}]])$           |
+| $[[\phi = \psi]]$      | $\eta(\left\lvert [[\phi]] - [[\psi]] \right\rvert)$ |   | $[[\mathtt{true}]]$                                 | $0$                                  |
+| $[[\phi \ne \psi]]$    | $[[\neg(\phi = \psi)]]$                              |   | $[[\mathtt{false}]]$                                | $1$                                  |
+| $[[\phi > \psi]]$      | $\eta(\frac{1}{2} - [[\phi]] + [[\psi]])$            |   | $[[X]]$                                             | $x$                                  |
+| $[[\phi \ge \psi]]$    | $\eta([[\psi]] - [[\phi]])$                          |   | $[[{k}]]$                                           | $k$                                  |
+| $[[\phi < \psi]]$      | $\eta(\frac{1}{2} + [[\phi]] - [[\psi]])$            |   | $[\mathrm{p}(\bar{X})]]^{**}$                       | $[[\psi_1 \vee \ldots \vee \psi_k]]$ |
 
 > $^{*}$ encodes the penalty for the $i^{\text{th}}$ neuron
+> <br>
 > $^{**}$ assuming predicate $p$ is defined by $k$ clauses of the form:
 > ${p}(\bar{X}) \leftarrow \psi_1,\ \ldots,\ {p}(\bar{X}) \leftarrow \psi_k$
 
@@ -1147,7 +1147,7 @@ $$
 
 ## Injector (pt. 2)
 
-{{< image src="./images/lambda-layer.svg" alt="Example of a neural network architecture with a lambda layer" width="80%" >}}
+{{< image src="./images/lambda-layer.svg" alt="Example of a neural network architecture with a lambda layer" width="80%" max-h="70vh" >}}
 
 {{% /section %}}
 
