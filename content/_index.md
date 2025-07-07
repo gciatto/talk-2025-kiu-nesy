@@ -839,7 +839,7 @@ The target feature is whether the individual earns more than $50,000 per year.
 
 ## Jump to the code
 
-GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/extraction.ipynb](https://github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/extraction.ipynb)
+GitHub repository at <https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/extraction.ipynb>
 
 {{< image src="./images/ske-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 
@@ -1256,7 +1256,7 @@ The poker hand data set (PHDS) (cf. [Cattral Robert and Oppacher Franz, 2002](ht
 
 ## Jump to the code!
 
-GitHub repository at [github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb](https://github.com/MatteoMagnini/demo-2025-woa-nesy/blob/master/notebook/injection.ipynb)
+GitHub repository at <https://github.com/gciatto/demo-2025-kiu-nesy/blob/master/notebook/injection.ipynb>
 
 {{< image src="./images/ski-notebook-qr.svg" alt="QR code to the Jupyter notebook" width="20%" >}}
 

@@ -1,4 +1,4 @@
-baseURL = "https://MatteoMagnini.github.io/talk-2025-woa-nesy"
+baseURL = "https://gciatto.github.io/talk-2025-kiu-nesy"
 languageCode = "en-us"
 title = "A Hugo theme for creating Reveal.js presentations"
 disableKinds = ["sitemap", "RSS"]
